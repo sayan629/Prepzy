@@ -50,7 +50,7 @@ export default function Home() {
         <StarsBackgroundDemo />
 
         <div className="col-span-full lg:col-span-3 flex flex-col items-center justify-center text-center lg: -rotate-2">
-          <Badge variant="gold">Powered by AI - Now in Beta</Badge>
+          <Badge variant="gold">AI is running the show, but we’re still cooking the final version</Badge>
 
           <h1 className="font-serif relative text-5xl sm:text-5xl lg:text-6xl tracking-tighter max-w-4xl">
             <GrayTitle>Your Career Starts Here</GrayTitle>
@@ -130,8 +130,8 @@ export default function Home() {
       <div className="text-center mb-16">
         <SectionLabel>Features</SectionLabel>
         <SectionHeading
-          gray="Everything you need"
-          gold="nothing you don't"
+          gray="Everything that matters"
+          gold="nothing that wastes time"
           />
       </div>
 
@@ -290,13 +290,13 @@ export default function Home() {
           <StarsBackgroundDemo />
 
           <h2 className="font-serif relative text-4xl md:text-5xl leading-tight tracking-tight mb-4">
-            <GrayTitle>Your next interview</GrayTitle>
+            <GrayTitle>Your placement arc</GrayTitle>
             <br />
             <GoldTitle>starts here</GoldTitle>
           </h2>
 
           <p className="relative text-stone-400 font-light text-sm mb-11">
-            Join thousands of engineers already levelling up on Prepzy.
+            Thousands of engineers are already on their grind with Prepzy.
           </p>
 
           <div className="flex flex-col sm:flex-row justify-center gap-4">
