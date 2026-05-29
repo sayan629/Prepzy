@@ -4,6 +4,9 @@ import { Button } from './ui/button';
 import Link from 'next/link';
 import Image from 'next/image';
 import { checkUser } from '@/lib/checkUser';
+import { CalendarDays, Users } from "lucide-react";
+import CreditButton from './CreditButton';
+
 
 const Header  = async() => {
   const user = await checkUser();
@@ -25,8 +28,7 @@ const Header  = async() => {
     {/* Sign in */}
     <div className="flex items-center gp-3">
         <Show when="signed-out">
-              { /* Link */}   
-               {/* Credits */}  
+
               <SignInButton mode="modal">
                 <Button variant = "ghost">Sign In</Button>
               </SignInButton>
@@ -35,6 +37,45 @@ const Header  = async() => {
               </SignUpButton>
             </Show>
             <Show when="signed-in">
+              { /* Link */}  
+              {user?.role === "INTERVIEWER" && (
+                <Button variant="ghost" asChild>
+                  <Link href="/dashboard">Dashboard</Link>
+                </Button>
+              )}
+
+              {user?.role === "INTERVIEWEE" && (
+                <>
+                  <Button variant="ghost" asChild>
+                    <Link href="/explore">
+                      <Users size={16} />
+                      <span className="hidden md:inline">Explore</span>
+                    </Link>
+                  </Button>
+                  <Button variant="default" asChild>
+                    <Link href="/appointments">
+                      <CalendarDays size={16} />
+                      <span className="hidden md:inline">My Appointments</span>
+                    </Link>
+                  </Button>
+                </>
+              )}
+      
+               {/* Credits */}  
+               <CreditButton 
+                  role = {user?.role === "INTERVIEWER" ? "INTERVIEWER" : 
+                    "INTERVIEWEE"}
+                  credits ={
+                    (user?.role === "INTERVIEWER" 
+                      ? user ?. creditBalance 
+                      : user ?. credits) ?? 0
+  
+                  }
+                />
+
+
+
+
               <UserButton />
             </Show>
     </div>
