@@ -25,6 +25,8 @@ const Header  = async() => {
     </Link>
 
     {/* Redirection logic */}
+    { user && <RoleRedirect/>}
+
     {/* Sign in */}
     <div className="flex items-center gp-3">
         <Show when="signed-out">
