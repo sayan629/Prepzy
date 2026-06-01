@@ -65,11 +65,11 @@ const InterviewerCard = ({ interviewer }) => {
             {bio}
           </p>
         )}
-    </CardContent>
+    
 
     {/* Categories */}
         {categories?.length > 0 && (
-          <div className="flex flex-wrap gap-1.5 ml-3">
+          <div className="flex flex-wrap gap-1.5 ">
             {categories.slice(0, 4).map((cat) => (
               <span
                 key={cat}
@@ -89,7 +89,7 @@ const InterviewerCard = ({ interviewer }) => {
         <Separator />
         
         {/* Bottom row — credit rate + availability + CTA */}
-        <div className="flex items-center justify-between gap-3 px-3">
+        <div className="flex items-center justify-between gap-3 ">
           <div className="flex flex-col gap-1">
             <p className="text-lg font-serif leading-none bg-linear-to-br from-amber-300 to-amber-500 bg-clip-text text-transparent">
               {creditRate ?? 10}
@@ -97,6 +97,7 @@ const InterviewerCard = ({ interviewer }) => {
                 credits / session
               </span>
             </p>
+
             {availability ? (
               <p className="text-xs text-stone-600">
                 🟢 {formatTime(availability.startTime)} –{" "}
@@ -108,7 +109,7 @@ const InterviewerCard = ({ interviewer }) => {
           </div>
         </div>
 
-
+    </CardContent>
   </Card>
   );
 }
