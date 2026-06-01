@@ -1,9 +1,11 @@
+import { Button } from '@/components/animate-ui/primitives/buttons/button';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent } from '@/components/ui/card';
 import { Separator } from '@/components/ui/separator';
 import { CATEGORY_LABEL } from '@/lib/data';
 import { formatTime } from '@/lib/helper';
+import Link from 'next/link';
 import React from 'react'
 
 const InterviewerCard = ({ interviewer }) => {
@@ -107,6 +109,15 @@ const InterviewerCard = ({ interviewer }) => {
               <p className="text-xs text-stone-700">No availability set</p>
             )}
           </div>
+
+            <Button
+                variant="outline"
+                size="sm"
+                className="shrink-0 border-amber-400/20 text-amber-400 hover:bg-amber-400/10 hover:border-amber-400/40"
+                asChild
+            >
+                <Link href={`/interviewers/${id}`}>View profile →</Link>
+            </Button>
         </div>
 
     </CardContent>
