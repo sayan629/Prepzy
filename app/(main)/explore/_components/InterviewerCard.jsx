@@ -18,10 +18,12 @@ const InterviewerCard = ({ interviewer }) => {
 
     const availability = availabilities?.[0];
 
-  return <Card className="relative border border-white/10 hover:border-amber-400/20">
-    <div className="absolute inset-0 bg-linear-to-br from-amber-400/5 via-transparent to-transparent pointer-events-none" />
+  return(
+    <Card className="relative border border-white/10 hover:border-amber-400/20">
+        <div className="absolute inset-0 bg-linear-to-br from-amber-400/5 via-transparent to-transparent pointer-events-none" />
 
     <CardContent className="flex flex-col gap-5">
+         {/* Top row — avatar + name + years */}
         <div className="flex items-start justify-between gap-3">
             <div className="flex items-center gap-3">
                 <Avatar className="w-11 h-11 border border-white/10 shrink-0">
@@ -30,11 +32,22 @@ const InterviewerCard = ({ interviewer }) => {
                     {name?.[0] ?? "?"}
                 </AvatarFallback>
                 </Avatar>
+                <div>
+                    <p className="text-sm font-medium text-stone-200 leading-tight">
+                    {name}
+                </p>
+                {title && company && (
+                    <p className="text-xs text-stone-500 mt-0.5">
+                    {title} · {company}
+                    </p>
+                )}
+                </div>
             </div>
         </div>
     </CardContent>
 
   </Card>
+  );
 }
 
 export default InterviewerCard
