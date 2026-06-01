@@ -1,4 +1,5 @@
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import { Badge } from '@/components/ui/badge';
 import { Card, CardContent } from '@/components/ui/card';
 import React from 'react'
 
@@ -43,6 +44,15 @@ const InterviewerCard = ({ interviewer }) => {
                 )}
                 </div>
             </div>
+
+            {yearsExp && (
+            <Badge
+              variant="outline"
+              className="shrink-0 border-white/10 text-stone-500 text-xs"
+            >
+              {yearsExp}+ yrs
+            </Badge>
+          )}
         </div>
     </CardContent>
 
