@@ -1,6 +1,7 @@
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent } from '@/components/ui/card';
+import { CATEGORY_LABEL } from '@/lib/data';
 import React from 'react'
 
 const InterviewerCard = ({ interviewer }) => {
@@ -63,6 +64,26 @@ const InterviewerCard = ({ interviewer }) => {
           </p>
         )}
     </CardContent>
+
+    {/* Categories */}
+        {categories?.length > 0 && (
+          <div className="flex flex-wrap gap-1.5 ml-3">
+            {categories.slice(0, 4).map((cat) => (
+              <span
+                key={cat}
+                className="text-xs px-2.5 py-1 rounded-lg border border-amber-400/20 bg-amber-400/5 text-amber-400"
+              >
+                {CATEGORY_LABEL[cat] ?? cat}
+              </span>
+            ))}
+            {categories.length > 4 && (
+              <span className="text-xs px-2.5 py-1 rounded-lg border border-white/10 text-stone-600">
+                +{categories.length - 4} more
+              </span>
+            )}
+          </div>
+        )}
+        
 
   </Card>
   );
