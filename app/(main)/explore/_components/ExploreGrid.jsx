@@ -66,6 +66,25 @@ const ExploreGrid = ({ interviewers }) => {
             filtered.length === 1 ? "" : "s"
             } found.`}
         </p>
+
+        {/* Interviewer grid */}
+        {filtered.length === 0 ? (
+            <div className = "py-20 text-center ">
+                <p className="text-stone-600 text-sm">No interviewers matches your filters. 
+                </p>
+                <Button
+                    onClick={() => {
+                        setActiveCategory(null);
+                        setSearch("");
+                    }}
+                    variant="link"
+                >
+                    Clear filters
+                </Button>
+            </div> 
+            ):( 
+            <div></div>
+        )}
     </div>
   );
 };
