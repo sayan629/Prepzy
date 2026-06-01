@@ -7,6 +7,7 @@ import { CATEGORIES } from '@/lib/data';
 import { Search } from 'lucide-react';
 import  { useMemo, useState } from 'react'
 import React from 'react'
+import InterviewerCard from './InterviewerCard';
 
 
 const ExploreGrid = ({ interviewers }) => {
