@@ -83,7 +83,11 @@ const ExploreGrid = ({ interviewers }) => {
                 </Button>
             </div> 
             ):( 
-            <div></div>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                {filtered.map((interviewer) => (
+                    <InterviewerCard key={interviewer.id} interviewer={interviewer} />
+                ))}
+            </div>
         )}
     </div>
   );
