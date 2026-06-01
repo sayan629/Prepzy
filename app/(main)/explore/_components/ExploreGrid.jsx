@@ -54,13 +54,13 @@ const ExploreGrid = ({ interviewers }) => {
                             }`}>
                             {cat.label}
                         </Button>
-                    )
+                    );
                 })}
             </div>
 
         </div>
     </div>
-  )
-}
+  );
+};
 
 export default ExploreGrid;
