@@ -1,7 +1,9 @@
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent } from '@/components/ui/card';
+import { Separator } from '@/components/ui/separator';
 import { CATEGORY_LABEL } from '@/lib/data';
+import { formatTime } from '@/lib/helper';
 import React from 'react'
 
 const InterviewerCard = ({ interviewer }) => {
@@ -83,7 +85,29 @@ const InterviewerCard = ({ interviewer }) => {
             )}
           </div>
         )}
+
+        <Separator />
         
+        {/* Bottom row — credit rate + availability + CTA */}
+        <div className="flex items-center justify-between gap-3 px-3">
+          <div className="flex flex-col gap-1">
+            <p className="text-lg font-serif leading-none bg-linear-to-br from-amber-300 to-amber-500 bg-clip-text text-transparent">
+              {creditRate ?? 10}
+              <span className="text-xs text-stone-500 font-sans  ml-1">
+                credits / session
+              </span>
+            </p>
+            {availability ? (
+              <p className="text-xs text-stone-600">
+                🟢 {formatTime(availability.startTime)} –{" "}
+                {formatTime(availability.endTime)}
+              </p>
+            ) : (
+              <p className="text-xs text-stone-700">No availability set</p>
+            )}
+          </div>
+        </div>
+
 
   </Card>
   );
