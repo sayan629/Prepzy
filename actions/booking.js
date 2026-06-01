@@ -47,4 +47,14 @@ export const bookSlot = async ({ interviewerId, startTime, endTime }) => {
         db.user.findUnique({where: { clerkUserId: user.id }}),
         db.user.findUnique({where: { id: interviewerId }}),
     ]);
+
+    if(!dbUser || dbUser.role !== "INTERVIEWEE") 
+        throw new Error("Only interviewees can book slots");
+    if(!interviewer || interviewer.role !== "INTERVIEWER")
+        throw new Error("Invalid interviewer");
+
+    const credits = interviewer.creditRate ?? 1;
+
+    if (dbUser.credits < credits)
+        throw new Error("Insufficient credits. Please Upgrade your plan.");
 };
