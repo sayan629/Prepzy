@@ -57,8 +57,15 @@ const ExploreGrid = ({ interviewers }) => {
                     );
                 })}
             </div>
-
         </div>
+        {/* Result count */}
+        <p className="text-xs text-stone-600">
+            {filtered.length === 0 
+            ? "No interviewers found."
+            : `${filtered.length} interviewer${
+            filtered.length === 1 ? "" : "s"
+            } found.`}
+        </p>
     </div>
   );
 };
