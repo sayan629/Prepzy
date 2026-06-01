@@ -54,6 +54,14 @@ const InterviewerCard = ({ interviewer }) => {
             </Badge>
           )}
         </div>
+
+
+        {/* Bio */}
+        {bio && (
+          <p className="text-xs text-stone-400 font-light leading-relaxed line-clamp-2">
+            {bio}
+          </p>
+        )}
     </CardContent>
 
   </Card>
