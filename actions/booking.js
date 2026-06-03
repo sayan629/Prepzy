@@ -3,6 +3,7 @@
 import { db } from "@/lib/prisma";
 import { currentUser } from "@clerk/nextjs/server";
 import { StreamClient } from "@stream-io/node-sdk";
+import { revalidatePath } from "next/cache";
 
 
 export const getInterviewerProfile = async (interviewerId) => {
@@ -158,6 +159,14 @@ export const bookSlot = async ({ interviewerId, startTime, endTime }) => {
 
             return newBooking;
     });
+
+      revalidatePath(`/interviewers/${interviewerId}`);
+      revalidatePath("/dashboard");
+
+      return { success: true, bookingId: booking.id, streamCallId };
+
     } catch(error){
+        console.error("bookSlot transaction failed:", err);
+        throw new Error("Failed to book the slot. Please try again.");
     }
 };
