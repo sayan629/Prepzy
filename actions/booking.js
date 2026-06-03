@@ -2,6 +2,7 @@
 
 import { db } from "@/lib/prisma";
 import { currentUser } from "@clerk/nextjs/server";
+import { StreamClient } from "@stream-io/node-sdk";
 
 
 export const getInterviewerProfile = async (interviewerId) => {
@@ -73,4 +74,45 @@ export const bookSlot = async ({ interviewerId, startTime, endTime }) => {
         throw new Error("This slot has already been booked. Please choose another one.");
 
     // *** --- Create Stream Call -------------------------------------------------------------------
+    let streamCallId;
+    try{
+        const streamClient = new StreamClient (
+            process.env.NEXT_PUBLIC_STREAM_API_KEY,
+            process.env.STREAM_SECRET_KEY
+        );
+
+        await streamClient.upsertUsers([
+        {
+            id: dbUser.clerkUserId,
+            name: dbUser.name ?? "Interviewee",
+            image: dbUser.imageUrl ?? undefined,
+            role: "user",
+        },
+        {
+        id: interviewer.clerkUserId,
+        name: interviewer.name ?? "Interviewer",
+        image: interviewer.imageUrl ?? undefined,
+        role: "user",
+        },
+    ]);
+
+    streamCallId = `mock_${Date.now()}_${Math.random()
+        .toString(36)
+        .substring(2, 7)}`;
+
+        const { call } = streamClient.video.call("default", streamCallId);
+
+        await call.getOrCreate({
+            data:{
+                created_by_id : dbUser.clerkUserId,
+                members:[
+                    { user_id: dbUser.clerkUserId , role: "host"},
+                    { user_id: interviewer.clerkUserId , role: "host"}
+                ],
+                settings_over
+            },
+        });
+    }
+    catch(error){
+    }
 };
