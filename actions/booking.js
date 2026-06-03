@@ -109,9 +109,24 @@ export const bookSlot = async ({ interviewerId, startTime, endTime }) => {
                     { user_id: dbUser.clerkUserId , role: "host"},
                     { user_id: interviewer.clerkUserId , role: "host"}
                 ],
-                settings_over
+                settings_override: {
+                    recording: {mode: "available", quality: "1080p"},
+                    screensharing: {
+                        enabled: true,  // target_resolution: { width: 1920, height: 1080 },
+                    },
+                    transcription: {
+                        mode: "auto-on",   // starts when first user joins, stops when all leave
+                    },
+                },
             },
         });
+    }
+    catch(error){
+        console.error("Stream call creation failed:", err);
+        throw new Error("Failed to create video call. Please try again.");
+    }
+    try{
+
     }
     catch(error){
     }
