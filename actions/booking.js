@@ -1,10 +1,17 @@
 "use server"
 
+import { createRateLimiter } from "@/lib/arject";
 import { db } from "@/lib/prisma";
+import { request } from "@arcjet/next";
 import { currentUser } from "@clerk/nextjs/server";
 import { StreamClient } from "@stream-io/node-sdk";
 import { revalidatePath } from "next/cache";
 
+const bookingLimiter = createRateLimiter({
+    refillRate: 2, // tokens
+    interval: "1h", // 1 hour
+    capacity: 5, // max tokens
+});
 
 export const getInterviewerProfile = async (interviewerId) => {
     try{
@@ -44,6 +51,13 @@ export const bookSlot = async ({ interviewerId, startTime, endTime }) => {
     if(!user) throw new Error("Unauthorized");
 
     // ---- Arject rate limit ---------------------------------------------------------
+      
+      const req = await request();
+        const rateLimitError = await checkRateLimit(bookingLimiter, req, user.id);
+          if(rateLimitError) throw new Error(rateLimitError);
+
+
+
 
     const [dbUser, interviewer] = await Promise.all([
         db.user.findUnique({where: { clerkUserId: user.id }}),
