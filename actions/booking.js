@@ -126,8 +126,38 @@ export const bookSlot = async ({ interviewerId, startTime, endTime }) => {
         throw new Error("Failed to create video call. Please try again.");
     }
     try{
+        const booking = await db.$transaction(async (tx) => {
+            const newBooking = await tx.booking.create({
+                data: {
+                    intervieweeId: dbUser.id,
+                    interviewerId,
+                    startTime: new Date(startTime),
+                    endTime: new Date(endTime),
+                    status: "SCHEDULED",
+                    creditsCharged: credits,
+                    streamCallId,
+                },
+            });
+            await tx.creditTransaction.create({
+                data: {
+                    userId: dbUser.id,
+                    amount: -credits,
+                    type: "BOOKING_DEDUCTION",
+                    bookingId: newBooking.id,
+                },
+            });
+            await tx.user.update({
+                where: { id: dbUser.id },
+                data: { credits: { decrement: credits } },
+                });
 
-    }
-    catch(error){
+            await tx.user.update({
+                where: { id: interviewerId },
+                data: { creditBalance: { increment: credits } },
+                });
+
+            return newBooking;
+    });
+    } catch(error){
     }
 };
