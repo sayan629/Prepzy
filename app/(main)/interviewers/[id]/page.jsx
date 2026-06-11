@@ -63,7 +63,7 @@ export default async function InterviewerProfilePage({ params }) {
               {interviewer.title && interviewer.company && (
                 <p className="text-base text-stone-400 font-light">
                   {interviewer.title}
-                  <span className="text-stone-700 mx-2">·</span>
+                  <span className="text-stone-600 mx-2">   • </span>
                   {interviewer.company}
                 </p>
               )}
