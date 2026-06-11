@@ -64,7 +64,21 @@ const InterviewerProfilePage = async({ params }) => {
                   </Badge>
                 )}
 
-                
+
+                  <Badge
+                      variant="outline"
+                      className="border-amber-400/25 bg-amber-400/8 text-amber-400 text-xs px-3 py-1">
+                      {interviewer.creditRate ?? 10} credits / session
+                    </Badge>
+                    
+                    {interviewer.availabilities?.[0] && (
+                      <Badge
+                        variant="outline"
+                        className="border-green-500/20 bg-green-500/8 text-green-400 text-xs px-3 py-1">
+                        🟢 Available
+                      </Badge>
+                    )}
+
       </div>
       </div>
     </div>
