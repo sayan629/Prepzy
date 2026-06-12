@@ -4,7 +4,7 @@ import { Badge } from '@/components/ui/badge';
 import { Card, CardContent } from '@/components/ui/card';
 import { Separator } from '@/components/ui/separator';
 import { CATEGORY_LABEL } from '@/lib/data';
-import { formatTime } from '@/lib/helper';
+import { formatTime } from '@/lib/helpers';
 import Link from 'next/link';
 import React from 'react'
 
