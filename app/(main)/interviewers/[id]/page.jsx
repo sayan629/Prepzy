@@ -9,10 +9,14 @@ import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import React from "react";
+import SlotPicker from "./_components/SlotPicker";
+import { getCurrentUser } from "@/actions/user";
 
 
 const InterviewerProfilePage = async ({ params }) => {
   const { id } = await params;
+
+  const dbUser = await getCurrentUser();
 
   const interviewer = await getInterviewerProfile(id);
 
@@ -55,7 +59,7 @@ const InterviewerProfilePage = async ({ params }) => {
               {interviewer.title && interviewer.company && (
                 <p className="text-base text-stone-400 font-light">
                   {interviewer.title}
-                  <span className="text-stone-700 mx-2">·</span>
+                  <span className="text-stone-700 mx-2">       ·       </span>
                   {interviewer.company}
                 </p>
               )}
@@ -157,7 +161,7 @@ const InterviewerProfilePage = async ({ params }) => {
         </div>
 
         {/* Right */}
-        <div className="lg:col-span-2 lg:sticky top-24">
+        <div className="lg:col-span-2 lg:sticky lg:top-24 self-start">
           <SlotPicker
             interviewer={interviewer}
             interviewerCredits={interviewer.creditRate ?? 10}
