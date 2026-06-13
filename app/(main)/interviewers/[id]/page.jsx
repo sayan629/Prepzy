@@ -8,7 +8,6 @@ import { CATEGORY_LABEL, EXPECT_ITEMS } from "@/lib/data";
 import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import React from "react";
 import SlotPicker from "./_components/SlotPicker";
 import { getCurrentUser } from "@/actions/user";
 
@@ -93,7 +92,7 @@ const InterviewerProfilePage = async ({ params }) => {
       </section>
 
       {/* Body */}
-      <div className="max-w-6xl mx-auto px-8 py-12 grid grid-cols-1 lg:grid-cols-5 gap-10 items-start">
+      <div className="max-w-6xl mx-auto px-8 py-12 grid grid-cols-1 lg:grid-cols-5 gap-10">
         {/* Left */}
         <div className="lg:col-span-3 flex flex-col gap-6">
           {interviewer.bio && (
@@ -160,8 +159,8 @@ const InterviewerProfilePage = async ({ params }) => {
           </div>
         </div>
 
-        {/* Right */}
-        <div className="lg:col-span-2 lg:sticky lg:top-24 self-start">
+        {/* Right — sticky now works since grid row height = left column height */}
+        <div className="lg:col-span-2 lg:sticky top-24">
           <SlotPicker
             interviewer={interviewer}
             interviewerCredits={interviewer.creditRate ?? 10}
@@ -173,4 +172,4 @@ const InterviewerProfilePage = async ({ params }) => {
   );
 };
 
-export default InterviewerProfilePage;
+export default InterviewerProfilePage; 
