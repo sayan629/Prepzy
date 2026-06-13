@@ -2,6 +2,8 @@
 
 import { bookSlot } from '@/actions/booking';
 import { GrayTitle } from '@/components/reusables';
+import { Button } from '@/components/ui/button';
+import { Separator } from '@/components/ui/separator';
 import UpgradeModal from '@/components/UpgradeModal';
 import useFetch from '@/hooks/use-fetch';
 import { formatDateTab, generateDates, generateSlots } from '@/lib/helpers';
@@ -37,6 +39,11 @@ const SlotPicker = ({interviewer , interviewerCredits, userCredits}) => {
       );
 
     }, [selectedDate,availability,interviewer.bookingAsInterviewer]);
+
+    const handleDateChange = (date) => {
+      setSelectedDate(date);
+      setSelectedSlot(null);
+    };
 
     if(!availability){
       return(
@@ -89,8 +96,32 @@ const SlotPicker = ({interviewer , interviewerCredits, userCredits}) => {
           {dates.map((date)=>{
             const label = formatDateTab(date);
             const active = date.toDateString() === selectedDate.toDateString();
+            return(
+              <button
+                key ={date.toDateString()}
+                type ="button"
+                onClick={()=> handleDateChange(date)}
+
+                  className={`shrink-0 flex flex-col items-center px-3.5 py-2.5 rounded-xl border text-xs transition-all duration-200 ${
+                    active
+                      ? "border-amber-400/40 bg-amber-400/10 text-amber-400"
+                      : "border-white/10 text-stone-500 hover:border-white/20 hover:text-stone-400"
+                  }`}                               
+                >
+                  <span className='font-medium'>{label.top}</span>
+                  <span
+                    className={`mt-0.5 ${
+                      active ? "text-amber-500/70" : "text-stone-700"}`}
+                      >
+                        {label.bottom}
+                      </span>
+                </button>
+            );
           })}
          </div>
+
+         <Separator/>
+         
     </div>
   </div>
   </>
