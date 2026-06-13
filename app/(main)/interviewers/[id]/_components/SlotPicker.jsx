@@ -6,7 +6,7 @@ import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
 import UpgradeModal from '@/components/UpgradeModal';
 import useFetch from '@/hooks/use-fetch';
-import { formatDateTab, generateDates, generateSlots } from '@/lib/helpers';
+import { formatDateTab, formatTime, generateDates, generateSlots } from '@/lib/helpers';
 import { useRouter } from 'next/navigation';
 import React, { useMemo, useState } from 'react';
 
@@ -101,7 +101,6 @@ const SlotPicker = ({interviewer , interviewerCredits, userCredits}) => {
                 key ={date.toDateString()}
                 type ="button"
                 onClick={()=> handleDateChange(date)}
-
                   className={`shrink-0 flex flex-col items-center px-3.5 py-2.5 rounded-xl border text-xs transition-all duration-200 ${
                     active
                       ? "border-amber-400/40 bg-amber-400/10 text-amber-400"
@@ -121,7 +120,43 @@ const SlotPicker = ({interviewer , interviewerCredits, userCredits}) => {
          </div>
 
          <Separator/>
-         
+
+         {slots.length === 0 ? (
+          <p className='text-xs text-stone-600 text-center py-4'>
+            No slots in the availability window for this date.
+          </p>
+         ) : (
+           <div className='"grid grid-cols-3 gap-2'>
+            {slots.map((slot) => {
+              const isSelected =
+                selectedSlot?.startTime.getTime() ===
+                slot.startTime.getTime();
+
+                return (
+                <button
+                    key ={date.toDateString()}
+                    type ="button"
+                    onClick={()=> handleDateChange(date)}
+                      className={`shrink-0 flex flex-col items-center px-3.5 py-2.5 rounded-xl border text-xs transition-all duration-200 ${
+                        active
+                          ? "border-amber-400/40 bg-amber-400/10 text-amber-400"
+                          : "border-white/10 text-stone-500 hover:border-white/20 hover:text-stone-400"
+                      }`}                               
+                    >
+                      {formatTime(slot.startTime)}
+                      {slot.isBooked && (
+                        <span
+                          className='absolute inset-x-0 bottom-0.5 text-center text-stone-700 leading-none'
+                          style={{fontSize : "9px"}}
+                        >
+                          booked
+                        </span>
+                      )}
+                      </button>
+                );
+            })}
+           </div>
+         )}     
     </div>
   </div>
   </>
