@@ -1,6 +1,7 @@
 "use client";
 
 import { bookSlot } from '@/actions/booking';
+import UpgradeModal from '@/components/UpgradeModal';
 import useFetch from '@/hooks/use-fetch';
 import { generateDates, generateSlots } from '@/lib/helpers';
 import { useRouter } from 'next/navigation';
@@ -33,13 +34,33 @@ const SlotPicker = ({interviewer , interviewerCredits, userCredits}) => {
         interviewer.bookingAsInterviewer ?? [],
         SLOT_DURATION_MINUTES,
       );
-      
-    }, [
-        selectedDate,
-        availability,
-        interviewer.bookingAsInterviewer,
-    ]);
-  return <div>SlotPicker</div>
-}
+
+    }, [selectedDate,availability,interviewer.bookingAsInterviewer]);
+
+    if(!availability){
+      return(
+        <div className='bg-[#0f0f11] border border-white/10 rounded-2xl p-8 text-center
+        flex flex-col items-center gap-2'>
+          <span className='text-2xl'>🕐</span>
+          <p className='text-sm text-stone-500'>No availability set yet.</p>
+          <p className='text-xs text-stone-700'>Check back later.</p>
+        </div>
+      );
+    }
+
+
+  return (
+  <>
+  <UpgradeModal
+  open={upgradeOpen}
+  onOpenChange={setUpgradeOpen}
+  reason={`You need ${interviewerCredits} credits to book this season. Your current balance is ${userCredits}.`}
+  />
+  <div>
+    
+  </div>
+  </>
+  );
+};
 
 export default SlotPicker;
