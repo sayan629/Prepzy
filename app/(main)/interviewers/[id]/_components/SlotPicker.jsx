@@ -45,6 +45,17 @@ const SlotPicker = ({interviewer , interviewerCredits, userCredits}) => {
       setSelectedSlot(null);
     };
 
+    const handleSlotClick = (slot) =>{
+      if (!slot.available) return;
+      if (!canAffroad){
+        setUpgradeOpen(true);
+        return;
+      }
+
+        setSelectedSlot((prev) =>
+        prev?.startTime.getTime() === slot.startTime.getTime() ? null : slot
+      );
+  };
     if(!availability){
       return(
         <div className='bg-[#0f0f11] border border-white/10 rounded-2xl p-8 text-center
@@ -134,13 +145,16 @@ const SlotPicker = ({interviewer , interviewerCredits, userCredits}) => {
 
                 return (
                 <button
-                    key ={date.toDateString()}
+                    key ={slot.startTime.toISOString()}
                     type ="button"
-                    onClick={()=> handleDateChange(date)}
-                      className={`shrink-0 flex flex-col items-center px-3.5 py-2.5 rounded-xl border text-xs transition-all duration-200 ${
-                        active
-                          ? "border-amber-400/40 bg-amber-400/10 text-amber-400"
-                          : "border-white/10 text-stone-500 hover:border-white/20 hover:text-stone-400"
+                    disabled = {slot.isBooked}
+                    onClick={() => handleSlotClick(slot)}
+                      className={`relative  px-2 py-2.5 rounded-xl border text-xs transition-all duration-200 ${
+                        isSelected
+                      ? "border-amber-400/60 bg-amber-400/15 text-amber-300 shadow-[0_0_12px_rgba(251,191,36,0.08)]"
+                      : slot.isBooked
+                      ? "border-white/5 bg-white/2 text-stone-700 cursor-not-allowed"
+                      : "border-white/10 text-stone-400 hover:border-amber-400/30 hover:text-amber-400 hover:bg-amber-400/5 cursor-pointer"
                       }`}                               
                     >
                       {formatTime(slot.startTime)}
@@ -152,7 +166,7 @@ const SlotPicker = ({interviewer , interviewerCredits, userCredits}) => {
                           booked
                         </span>
                       )}
-                      </button>
+                  </button>
                 );
             })}
            </div>
