@@ -6,9 +6,9 @@ import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
 import UpgradeModal from '@/components/UpgradeModal';
 import useFetch from '@/hooks/use-fetch';
-import { formatDateTab, formatTime, generateDates, generateSlots } from '@/lib/helpers';
+import { formatDateFull, formatDateTab, formatTime, generateDates, generateSlots } from '@/lib/helpers';
 import { useRouter } from 'next/navigation';
-import React, { useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 
 
 const SLOT_DURATION_MINUTES = 45;
@@ -40,6 +40,8 @@ const SlotPicker = ({interviewer , interviewerCredits, userCredits}) => {
 
     }, [selectedDate,availability,interviewer.bookingAsInterviewer]);
 
+    console.log(slots);
+
     const handleDateChange = (date) => {
       setSelectedDate(date);
       setSelectedSlot(null);
@@ -56,6 +58,23 @@ const SlotPicker = ({interviewer , interviewerCredits, userCredits}) => {
         prev?.startTime.getTime() === slot.startTime.getTime() ? null : slot
       );
   };
+
+    useEffect(()=> {
+      if(data?.success && data.streamCallId){
+        router.push(`/appointments`);
+      }
+    },[data,router]);
+
+    const handleConfirm = () => {
+      if(!selectedSlot) return;
+      bookFn({
+        interviewerId:interviewer.id,
+        startTime: selectedSlot.startTime.toISOString(),
+        endTime: selectedSlot.endTime.toISOString(),
+      });
+    };
+
+
     if(!availability){
       return(
         <div className='bg-[#0f0f11] border border-white/10 rounded-2xl p-8 text-center
@@ -172,6 +191,82 @@ const SlotPicker = ({interviewer , interviewerCredits, userCredits}) => {
            </div>
          )}     
     </div>
+
+    {selectedSlot && (<div className='bg-[#0f0f11] border border-amber-400/20 rounded-2xl p-6 flex flex-col gap-4'>
+         <p className='text-xs font-semibold text-stone-500 tracking-widest uppercase'>
+          Your Booking
+
+         </p>
+          <div className="flex flex-col gap-2">
+              <div className="flex justify-between text-xs">
+                <span className="text-stone-500">Date</span>
+                <span className="text-stone-300">
+                  {formatDateFull(selectedSlot.startTime)}
+                </span>
+              </div>
+              <div className="flex justify-between text-xs">
+                <span className="text-stone-500">Time</span>
+                <span className="text-stone-300">
+                  {formatTime(selectedSlot.startTime)} –{" "}
+                  {formatTime(selectedSlot.endTime)}
+                </span>
+              </div>
+              <div className="flex justify-between text-xs">
+                <span className="text-stone-500">Duration</span>
+                <span className="text-stone-300">
+                  {SLOT_DURATION_MINUTES} minutes
+                </span>
+              </div>
+            </div>
+
+            <Separator className="bg-white/8"/>
+
+            <div className="flex justify-between items-center">
+              <span className="text-xs text-stone-400">Credits charged</span>
+              <span className="font-serif text-lg bg-linear-to-br from-amber-300 to-amber-500 bg-clip-text text-transparent leading-none">
+                −{interviewerCredits}
+              </span>
+            </div>
+            <div className="flex justify-between text-xs">
+              <span className="text-stone-600">Balance after</span>
+              <span className="text-stone-500">
+                {userCredits - interviewerCredits} credits
+              </span>
+            </div>
+
+            <div className="flex items-start gap-2.5 rounded-xl border border-white/8 bg-white/2 px-3.5 py-3">
+              <span className="text-sm shrink-0">🎥</span>
+              <p className="text-xs text-stone-500 font-light leading-relaxed">
+                A video call room will be created and you&apos;ll be redirected
+                immediately after confirming.
+              </p>
+            </div>  
+
+            {error && (
+              <p className="text-xs text-red-400">{error?.message || error}</p>
+            )}
+            <div className='flex gap-2'>
+              <Button 
+                variant='outline'
+                size='sm'
+                className="flex-1"
+                disabled={loading}
+                onClick={() => setSelectedSlot(null)}
+              >
+                Change slot
+              </Button>
+              <Button
+                variant="gold"
+                size="sm"
+                className="flex-1"
+                disabled={loading}
+                onClick={handleConfirm}               
+              >
+                {loading ? "creating call..." : "Confirm →"}
+              </Button>
+            </div>
+         </div>
+  )}
   </div>
   </>
   );
