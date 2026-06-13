@@ -192,7 +192,7 @@ const SlotPicker = ({interviewer , interviewerCredits, userCredits}) => {
          )}     
     </div>
 
-    {selectedSlot && (<div className='bg-[#0f0f11] border border-amber-400/20 rounded-2xl p-6 flex flex-col gap-4'>
+    {selectedSlot && (<div className='bg-[#0f0f11] border border-amber-400/20 rounded-2xl p-10 flex flex-col gap-'>
          <p className='text-xs font-semibold text-stone-500 tracking-widest uppercase'>
           Your Booking
 
