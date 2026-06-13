@@ -1,9 +1,10 @@
 "use client";
 
 import { bookSlot } from '@/actions/booking';
+import { GrayTitle } from '@/components/reusables';
 import UpgradeModal from '@/components/UpgradeModal';
 import useFetch from '@/hooks/use-fetch';
-import { generateDates, generateSlots } from '@/lib/helpers';
+import { formatDateTab, generateDates, generateSlots } from '@/lib/helpers';
 import { useRouter } from 'next/navigation';
 import React, { useMemo, useState } from 'react';
 
@@ -56,8 +57,41 @@ const SlotPicker = ({interviewer , interviewerCredits, userCredits}) => {
   onOpenChange={setUpgradeOpen}
   reason={`You need ${interviewerCredits} credits to book this season. Your current balance is ${userCredits}.`}
   />
-  <div>
+  <div className='flex flex-col gap-4'>
+    {/* ── Main picker card ── */}
+    <div className='bg-[#0f0f11] border border-white/10 rounded-2xl p-5 flex flex-col gap-8' >
     
+      {/* Header */}
+      <div className='flex items-start justify-between gap-3'>
+        <div>
+          <h2 className='font-serif text-xl tracking-tight'>
+            <GrayTitle>Book a Session</GrayTitle>
+          </h2>
+          <p className='text-xs text-stone-500 font-light mt-1'>
+            Select a date and available time slot.
+          </p>
+        </div>
+
+          <div className='text-right shrink-0'>
+            <p className='text-xs text-stone-600'>Cost</p>
+            <p className='font-serif text-2xl leading-none bg-linear-to-br from-amber-300 to-amber-500 bg-clip-text text-transparent'>
+              {interviewerCredits}
+              <span className='text-xs font-sans text-stone-500 ml-1'>
+                cr
+              </span>
+            </p>   
+          </div>
+      </div>
+       
+
+         {/* Date tabs */}
+         <div className='flex gap-2 overflow-x-auto pb-0.5 scrollbar-none -mx-1 px-1'>
+          {dates.map((date)=>{
+            const label = formatDateTab(date);
+            const active = date.toDateString() === selectedDate.toDateString();
+          })}
+         </div>
+    </div>
   </div>
   </>
   );
