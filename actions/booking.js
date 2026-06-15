@@ -1,6 +1,6 @@
 "use server"
 
-import { createRateLimiter } from "@/lib/arject";
+import { checkRateLimit, createRateLimiter } from "@/lib/arject";
 import { db } from "@/lib/prisma";
 import { request } from "@arcjet/next";
 import { currentUser } from "@clerk/nextjs/server";
