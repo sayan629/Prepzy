@@ -1,4 +1,5 @@
 import { getIntervieweeAppointments } from '@/actions/appointment';
+import AppointmentCard from '@/components/AppointmentCard';
 import PageHeader from '@/components/reusables';
 import { Button } from '@/components/ui/button';
 import { CalendarDays } from 'lucide-react';
@@ -58,7 +59,6 @@ const MyAppointmentsPage = async () => {
                     <div className='grid grid-cols-1 lg:grid-cols-2 gap-4'>
                         {scheduled.map((b) =>(
                             <AppoinmentCard key= {b.id} booking ={b} mode ="interviewee" />
-
                         ))}
                     </div>
                 </div>
@@ -73,6 +73,12 @@ const MyAppointmentsPage = async () => {
                     </p>
                     <div className='flex-1 h-px bg-white/5' />
                     </div>
+                    
+                    <div className='grid grid-cols-1 lg:grid-cols-2 gap-4'>
+                        {past.map((b) => (
+                            <AppointmentCard key ={b.id} booking={b} mode ="interviewee" isPast ={true} />
+                        ))}
+                        </div>
                 </div>
                 )}
         </div>
