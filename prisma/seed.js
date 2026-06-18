@@ -10,7 +10,7 @@ const adapter = new PrismaPg(pool);
 const db = new PrismaClient({ adapter });
 
 // ── CHANGE THIS ───────────────────────────────────────────────────────────────
-const BOOKING_ID = "your-booking-id-here";
+const BOOKING_ID = "f9b99487-7b4a-41a7-933b-b29e7cc5b3a3";
 // ─────────────────────────────────────────────────────────────────────────────
 
 const feedback = {
