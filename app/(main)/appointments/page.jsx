@@ -1,5 +1,7 @@
 import { getIntervieweeAppointments } from '@/actions/appointment';
 import PageHeader from '@/components/reusables';
+import { Button } from '@/components/ui/button';
+import { CalendarDays, Link } from 'lucide-react';
 import React from 'react'
 
 const MyAppointmentsPage = async () => {
@@ -13,15 +15,38 @@ const MyAppointmentsPage = async () => {
         (a) => a.status !== "SCHEDULED" && new Date(a.endTime) <= now
     );
 
-  return <main className='min-h-screen bg-black'>
+  return(
+   <main className='min-h-screen bg-black'>
     <PageHeader
         label="My appointments"
         gray= "Your Interview"
         gold = "sessions"
         description= "All your upcoming ans past mock interviwes in one place."
         />
-        <div classname = "max-w-6xl mx-auto px-8 lg:px-0 py-8 flex flex-col gap-14"></div>
-    </main>;
+        <div classname = "max-w-6xl mx-auto px-8 lg:px-0 py-8 flex flex-col gap-14">
+            {/* ── Empty state ── */}
+            {appointments.length === 0 && (
+                <div className='flex flex-col items-center justify-center py-28 gap-5 text-center'>
+                    <span className='w-16 h-16 rounded-2xl bg-amber-400/10 border border-amber-400/20 flex items-center justify-center text-3xl'>
+                    <CalendarDays size = {28} className='text-amber-400'/>
+                    </span>
+                    <div>
+                        <p className='text-base text-stone-600 font-light'>
+                            No Sessions booked yet.
+                        </p>
+                        <p className='text-sm text-stone-600 mt-1'>
+                            Browse expert interviewers and book your first session.
+                        </p>
+                        </div>
+
+                        <Button variant='gold' asChild>
+                            <Link href='/explore'>Browse interviewers →</Link>
+                        </Button>
+                </div>
+            )}
+        </div>
+    </main>
+  );
 };
 
 export default MyAppointmentsPage
