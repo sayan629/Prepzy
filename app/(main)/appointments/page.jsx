@@ -1,7 +1,8 @@
 import { getIntervieweeAppointments } from '@/actions/appointment';
 import PageHeader from '@/components/reusables';
 import { Button } from '@/components/ui/button';
-import { CalendarDays, Link } from 'lucide-react';
+import { CalendarDays } from 'lucide-react';
+import Link from 'next/link';
 import React from 'react'
 
 const MyAppointmentsPage = async () => {
@@ -23,7 +24,7 @@ const MyAppointmentsPage = async () => {
         gold = "sessions"
         description= "All your upcoming ans past mock interviwes in one place."
         />
-        <div classname = "max-w-6xl mx-auto px-8 lg:px-0 py-8 flex flex-col gap-14">
+        <div className = "max-w-6xl mx-auto px-8 lg:px-0 py-8 flex flex-col gap-14">
             {/* ── Empty state ── */}
             {appointments.length === 0 && (
                 <div className='flex flex-col items-center justify-center py-28 gap-5 text-center'>
@@ -44,6 +45,36 @@ const MyAppointmentsPage = async () => {
                         </Button>
                 </div>
             )}
+
+            {/* -- Upcoming -- */}
+            {scheduled.length>0 && (
+                 <div className='flex flex-col gap-5'>
+                <div className='flex items-center gap-4'>
+                    <p className='text-xs font-semibold text-stone-500 tracking-widest uppercase'>
+                        Upcomming ({scheduled.length})
+                    </p>
+                    <div className='flex-1 h-px bg-white/5' />
+                    </div>
+                    <div className='grid grid-cols-1 lg:grid-cols-2 gap-4'>
+                        {scheduled.map((b) =>(
+                            <AppoinmentCard key= {b.id} booking ={b} mode ="interviewee" />
+
+                        ))}
+                    </div>
+                </div>
+                )}
+
+            {/* -- Past -- */}
+            {past.length>0 && (
+                 <div className='flex flex-col gap-5'>
+                <div className='flex items-center gap-4'>
+                    <p className='text-xs font-semibold text-stone-500 tracking-widest uppercase'>
+                        Past ({past.length})
+                    </p>
+                    <div className='flex-1 h-px bg-white/5' />
+                    </div>
+                </div>
+                )}
         </div>
     </main>
   );
