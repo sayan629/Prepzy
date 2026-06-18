@@ -13,6 +13,12 @@ const AppointmentCard = ({booking, mode, isPast = false}) => {
         recordingUrl,
         feedback,
     } = booking;
+
+    const person = 
+        mode === 'interviewer' ? booking.interview : booking.interviewer;
+
+    const creditsLabel =
+     mode === "interviewer"
   return <div>AppointmentCard</div>
 
 };
