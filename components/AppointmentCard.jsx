@@ -1,8 +1,9 @@
 import React from 'react'
 
 const AppointmentCard = ({booking, mode, isPast = false}) => {
-  return 
+  return (
     <div>AppointmentCard</div>
+  )
 };
 
 export default AppointmentCard
