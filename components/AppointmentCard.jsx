@@ -9,7 +9,8 @@ import { Button } from "@/components/ui/button";
 import { Calendar, Clock, Video, Sparkles } from "lucide-react";
 import { formatDate, formatDuration, formatTime } from "@/lib/helpers";
 import { RATING_LABEL, RATING_STYLES, STATUS_STYLES } from "@/lib/data";
-import FeedbackModal from "./FeedbackModal";
+import { FeedbackModal } from "./FeedbackModal";
+
 
 export function AppointmentCard({ booking, mode, isPast = false }) {
   const [feedbackOpen, setFeedbackOpen] = useState(false);

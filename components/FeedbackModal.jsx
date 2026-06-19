@@ -1,11 +1,22 @@
 "use client";
 
 import React from 'react'
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from './ui/dialog';
 
-const FeedbackModal = () => {
+export function FeedbackModal ({
+    open,
+    onOpenChange,
+    feedback,
+    intervieweeName,
+}){
   return (
-    <div>FeedbackModal</div>
-  )
-}
+    <Dialog open ={open} onOpenChange={onOpenChange}>
+    <DialogContent>
+        <DialogHeader>
+        <DialogTitle>Are you absolutely sure?</DialogTitle>
+        </DialogHeader>
+    </DialogContent>
+    </Dialog>
+  );
+};
 
-export default FeedbackModal
