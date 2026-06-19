@@ -2,6 +2,7 @@
 
 import React from 'react'
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from './ui/dialog';
+import { RATING_CONFIG } from '@/lib/data';
 
 export function FeedbackModal ({
     open,
@@ -9,6 +10,11 @@ export function FeedbackModal ({
     feedback,
     intervieweeName,
 }){
+
+    const FeedbackModal = ({open, onOpenChange, feedback, intervieweeName}) => {
+        if(!feedback) return null;
+        const rating = RATING_CONFIG[feedback.overallRating];
+
   return (
     <Dialog open ={open} onOpenChange={onOpenChange}>
     <DialogContent>
