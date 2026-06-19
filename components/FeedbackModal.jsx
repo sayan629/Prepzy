@@ -15,7 +15,7 @@ export function FeedbackModal ({open, onOpenChange, feedback, intervieweeName,})
 
   return (
     <Dialog open ={open} onOpenChange={onOpenChange}>
-    <DialogContent className='bg-black border border-amber-200/20 text-stone-100 sm:max-w-3xl max-h-[85vh] overflow-y-auto'>
+    <DialogContent className='bg-black border border-amber-200/20 text-stone-100 sm:max-w-2xl max-h-[85vh] overflow-y-auto'>
 
     <StarsBackground/>
 
