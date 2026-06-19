@@ -46,7 +46,18 @@ const AppointmentCard = ({booking, mode, isPast = false}) => {
                         {person?.name ?? "—"}
                     </p>
                         {person?.title && person?.company ? (
-                            <p className='text-xs te'
+                            <p className='text-xs text-stone-500 truncate'>
+                                {person.title}
+                                <span className='text-stone-700 mx-1.5'>·</span>
+                                {person.company}
+                            </p>
+                        ):(
+                            <p className='text-xs text-stone-600 truncate'>
+                                {person?.email}
+                            </p>
+                        )}
+                        {mode === "interviewee" && person?.categories?.length >0 &&(
+                            
                         )}
                 </div>
             </div>
