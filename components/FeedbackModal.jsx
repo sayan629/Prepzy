@@ -32,6 +32,17 @@ export function FeedbackModal ({open, onOpenChange, feedback, intervieweeName,})
 
         <div className='relative flex flex-col gap-5 mt-2'>
             {/*Rating */}
+            <div className={`rounded-2xl border ${rating.className} bg-linear-to-br ${rating.bg} to-transparent p-6 flex items-center justify-between`}
+            >
+                <div>
+                    <p className='text-[10px] uppercase tracking-widest opacity-60'>
+                        Overall rating
+                    </p>
+                    <p className='font-serif text-3xl'>{rating.label}</p>
+                </div>
+
+                <span className='text-4xl'>{rating.emoji}</span>
+            </div>
 
         </div>
     </DialogContent>
