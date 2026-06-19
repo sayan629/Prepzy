@@ -149,6 +149,16 @@ const AppointmentCard = ({booking, mode, isPast = false}) => {
                             </Link>
                         </Button>
                     )}
+                    {recordingUrl && has?.({plan : "pro"})&&(
+                        <Button variant='outline' size='sm' className='gap-2' asChild>
+                            <a 
+                                href={recordingUrl}
+                                target='_blank'
+                                rel='noopener noreferrer'>
+                                    📹 Recording
+                                </a>
+                        </Button>
+                    )}
                 </div>
             )}
     </article>
