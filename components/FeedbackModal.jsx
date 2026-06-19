@@ -5,6 +5,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle } from './ui/dialog';
 import { RATING_CONFIG } from '@/lib/data';
 import { StarsBackground } from './animate-ui/components/backgrounds/stars';
 import { GrayTitle } from './reusables';
+import { Sparkles } from 'lucide-react';
 
 export function FeedbackModal ({open, onOpenChange, feedback, intervieweeName,})
 {
@@ -44,6 +45,16 @@ export function FeedbackModal ({open, onOpenChange, feedback, intervieweeName,})
                 <span className='text-4xl'>{rating.emoji}</span>
             </div>
 
+            {/* Summary */}
+            <div className='bg-[#141417] border border-white/8 rounded-2xl p-5'>
+                <div className='flex items-center gap-2 mb-2'>
+                    <Sparkles size ={13} className='tem-amber-400'/>
+                        <p className='text-[10px] uppercase tracking-widest text-stone-500'>
+                            Summary 
+                        </p>
+                </div>
+                <p className='text-sm text-stone-300'>{feedback.summary}</p>
+            </div>
         </div>
     </DialogContent>
     </Dialog>
