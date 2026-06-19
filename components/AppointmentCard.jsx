@@ -4,6 +4,7 @@ import React, { useState } from 'react'
 import { Avatar, AvatarFallback, AvatarImage } from './ui/avatar';
 import { CATEGORY_LABEL, STATUS_STYLES } from '@/lib/data';
 import { Badge } from './ui/badge';
+import { Separator } from './ui/separator';
 
 const AppointmentCard = ({booking, mode, isPast = false}) => {
     const [feedbackOpen, setFeedbackOpen] = useState(false);
@@ -79,6 +80,9 @@ const AppointmentCard = ({booking, mode, isPast = false}) => {
                     {creditsLabel}
                 </Badge>
             </div>
+
+            
+            <Separator/>
         </div>
     </article>
   </>
