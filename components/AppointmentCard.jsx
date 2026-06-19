@@ -5,6 +5,8 @@ import { Avatar, AvatarFallback, AvatarImage } from './ui/avatar';
 import { CATEGORY_LABEL, STATUS_STYLES } from '@/lib/data';
 import { Badge } from './ui/badge';
 import { Separator } from './ui/separator';
+import { Calendar } from 'lucide-react';
+import { formatDate } from '@/lib/helpers';
 
 const AppointmentCard = ({booking, mode, isPast = false}) => {
     const [feedbackOpen, setFeedbackOpen] = useState(false);
@@ -81,8 +83,20 @@ const AppointmentCard = ({booking, mode, isPast = false}) => {
                 </Badge>
             </div>
 
-            
+
             <Separator/>
+
+            <div className='grid grid-cols-3 gap-4'>
+                <div classname = 'flex flex-col gap-1.5'>
+                    <div className='flex items-center gap-1.5 text-stone-600'>
+                        <Calendar size={12} />
+                        <span className='text-[10px] font-semibold tracking-widest uppercase'>
+                            Date
+                        </span>
+                    </div>
+                    <p className='text-sm text-stone-300'>{formatDate(startTime)}</p>
+                </div>
+            </div>
         </div>
     </article>
   </>
