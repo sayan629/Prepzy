@@ -125,7 +125,17 @@ const AppointmentCard = ({booking, mode, isPast = false}) => {
                     </p>
                 </div>
             </div>
-            
+
+            {feedback?.summary && (
+                <div className='rounded-xl border border-white/8 bg-[#141417] px-4 py-3 flex flex-col gap-1.5'>
+                    <p className="text-[10px] font-semibold text-stone-600 tracking-widest uppercase">
+                        AI Feedback
+                    </p>
+                    <p className="text-[10px] font-semibold text-stone-600 tracking-widest uppercase">
+                        {feedback.summary}
+                    </p>
+                </div>
+            )}
     </article>
   </>
   );
