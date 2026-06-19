@@ -5,7 +5,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle } from './ui/dialog';
 import { RATING_CONFIG } from '@/lib/data';
 import { StarsBackground } from './animate-ui/components/backgrounds/stars';
 import { GrayTitle } from './reusables';
-import { Brain, CheckCircle2, MessageSquare, Sparkles, TrendingUp } from 'lucide-react';
+import { AlertCircle, Brain, CheckCircle2, MessageSquare, Sparkles, TrendingUp } from 'lucide-react';
 import { Badge } from './ui/badge';
 
 export function FeedbackModal ({open, onOpenChange, feedback, intervieweeName,})
@@ -121,6 +121,26 @@ export function FeedbackModal ({open, onOpenChange, feedback, intervieweeName,})
                     </div>
                 </div>
 
+                <div className="bg-[#141417] border border-white/8 rounded-xl p-5">
+                <div className="flex items-center gap-2 mb-3">
+                    <AlertCircle size={13} className="text-amber-400" />
+                    <p className="text-[10px] uppercase tracking-widest text-stone-500">
+                    To improve
+                    </p>
+                </div>
+
+                <div className="flex flex-col gap-2">
+                    {feedback.improvements?.map((imp, i) => (
+                    <Badge
+                        key={i}
+                        variant="outline"
+                        className="justify-start border-red-500/20 text-red-400 whitespace-normal"
+                    >
+                        ✓ {imp}
+                    </Badge>
+                    ))}
+                </div>
+                </div>                
             </div>
         </div>
     </DialogContent>
