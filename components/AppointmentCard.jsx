@@ -7,6 +7,8 @@ import { Badge } from './ui/badge';
 import { Separator } from './ui/separator';
 import { Calendar, Clock, Video } from 'lucide-react';
 import { formatDate, formatDuration, formatTime } from '@/lib/helpers';
+import { Button } from './ui/button';
+import Link from 'next/link';
 
 const AppointmentCard = ({booking, mode, isPast = false}) => {
     const [feedbackOpen, setFeedbackOpen] = useState(false);
@@ -134,6 +136,19 @@ const AppointmentCard = ({booking, mode, isPast = false}) => {
                     <p className="text-[10px] font-semibold text-stone-600 tracking-widest uppercase">
                         {feedback.summary}
                     </p>
+                </div>
+            )}
+
+            {(streamCallId || recordingUrl || feedback)&&(
+                <div className='flex items-center gap-2 flex-wrap pt-1'>
+                    {!isPast && streamCallId && isUpcoming && (
+                        <Button variant='gold' size='sm' className='gap-2' asChild>
+                            <Link href ={`/call/${streamCallId}`}>
+                            <Video size ={13} />
+                            Join Call
+                            </Link>
+                        </Button>
+                    )}
                 </div>
             )}
     </article>
