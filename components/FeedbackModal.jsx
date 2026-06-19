@@ -5,7 +5,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle } from './ui/dialog';
 import { RATING_CONFIG } from '@/lib/data';
 import { StarsBackground } from './animate-ui/components/backgrounds/stars';
 import { GrayTitle } from './reusables';
-import { Brain, MessageSquare, Sparkles, TrendingUp } from 'lucide-react';
+import { Brain, CheckCircle2, MessageSquare, Sparkles, TrendingUp } from 'lucide-react';
 
 export function FeedbackModal ({open, onOpenChange, feedback, intervieweeName,})
 {
@@ -96,6 +96,19 @@ export function FeedbackModal ({open, onOpenChange, feedback, intervieweeName,})
                         <p className='text-sm text-stone-300'>{item.value}</p>
                     </div>
                 ))}
+            </div>
+
+            {/* Srengths & improvements */}
+            <div classname = 'grid grid-cols-2 gap-3'>
+                <div className='bg-[#141417] border border-white/8 rounded-xl p-5'>
+                    <div className='flex items-center gap-2 mb-3'>
+                        <CheckCircle2 size={13} className='text-green-400'/>
+                            <p className='text-[10px] uppercase tracking-widest text-stone-500'>
+                                Strengths
+                            </p>
+                    </div>
+                </div>
+
             </div>
         </div>
     </DialogContent>
