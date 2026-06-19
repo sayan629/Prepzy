@@ -55,6 +55,14 @@ export function FeedbackModal ({open, onOpenChange, feedback, intervieweeName,})
                 </div>
                 <p className='text-sm text-stone-300'>{feedback.summary}</p>
             </div>
+
+            {/* Recommendation */}
+            <div className='bg-[#141417] border border-white/8 rounded-xl p-5'>
+                <p className='text-[10px] uppercase tracking-widest text-stone-500 mb-2'>
+                    Recommendation 
+                </p>
+                <p className='text-sm text-stone-300'>{feedback.recommendation}</p>
+            </div>
         </div>
     </DialogContent>
     </Dialog>
