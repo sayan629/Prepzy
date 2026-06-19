@@ -6,6 +6,7 @@ import { RATING_CONFIG } from '@/lib/data';
 import { StarsBackground } from './animate-ui/components/backgrounds/stars';
 import { GrayTitle } from './reusables';
 import { Brain, CheckCircle2, MessageSquare, Sparkles, TrendingUp } from 'lucide-react';
+import { Badge } from './ui/badge';
 
 export function FeedbackModal ({open, onOpenChange, feedback, intervieweeName,})
 {
@@ -106,6 +107,17 @@ export function FeedbackModal ({open, onOpenChange, feedback, intervieweeName,})
                             <p className='text-[10px] uppercase tracking-widest text-stone-500'>
                                 Strengths
                             </p>
+                    </div>
+
+                    <div className='flex flex-col gap-2'>
+                        {feedback.strengths ?.map((s,i) =>(
+                            <Badge
+                                key ={i}
+                                variant='outline'
+                                className='justify-start border-green-500/20 text-green-400 whitespace-normal'>
+                                    ✓ {s}
+                                </Badge>
+                        ))}
                     </div>
                 </div>
 
