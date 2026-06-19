@@ -82,7 +82,20 @@ export function FeedbackModal ({open, onOpenChange, feedback, intervieweeName,})
                         label: "Problem Solving",
                         value: feedback.problemSolving,
                     },
-                ]}
+                ].map((item)=>(
+                    <div
+                        key={item.label}
+                        className='bg-[#141417] border border-white/8 rounded-xl p-5'
+                    >
+                        <div className='flex items-center gap-2 mb-2'>
+                            {item.icon}
+                            <p className='text-[10px] uppercase tracking-widest text-stone-500'>
+                                {item.label}
+                            </p>
+                        </div>
+                        <p className='text-sm text-stone-300'>{item.value}</p>
+                    </div>
+                ))}
             </div>
         </div>
     </DialogContent>
