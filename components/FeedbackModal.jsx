@@ -5,7 +5,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle } from './ui/dialog';
 import { RATING_CONFIG } from '@/lib/data';
 import { StarsBackground } from './animate-ui/components/backgrounds/stars';
 import { GrayTitle } from './reusables';
-import { Sparkles } from 'lucide-react';
+import { Brain, MessageSquare, Sparkles, TrendingUp } from 'lucide-react';
 
 export function FeedbackModal ({open, onOpenChange, feedback, intervieweeName,})
 {
@@ -62,6 +62,27 @@ export function FeedbackModal ({open, onOpenChange, feedback, intervieweeName,})
                     Recommendation 
                 </p>
                 <p className='text-sm text-stone-300'>{feedback.recommendation}</p>
+            </div>
+
+            {/* Sections */}
+            <div className='grid gap-3'>
+                {[
+                    {
+                        icon: <Brain size ={14} className='text-amber-400' />,
+                        label: "Technical",
+                        value: feedback.technical,
+                    },
+                    {
+                        icon: <MessageSquare size={14} className='text-amber-400'/>,
+                        label: "Communication",
+                        value: feedback.communication,
+                    },
+                    {
+                        icon: <TrendingUp size={14} className='text-amber-400'/>,
+                        label: "Problem Solving",
+                        value: feedback.problemSolving,
+                    },
+                ]}
             </div>
         </div>
     </DialogContent>
