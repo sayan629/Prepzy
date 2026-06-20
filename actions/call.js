@@ -27,4 +27,10 @@ export const getCallData = async (callId) => {
             },
         },
     });
+
+    if(!booking) return {error: "Call not found"};
+
+    const isInterviewer = booking.interviewer.clerkUserId === user.id;
+    const isInterviewee = booking.interviewee.clerkUserId === user.id;
+    if(!isInterviewer && !isInterviewee) return { error: "Forbidden" };
 };
