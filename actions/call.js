@@ -8,6 +8,23 @@ export const getCallData = async (callId) => {
 
     const booking = await db.booking.findUnique({
         where: {streamCallId: callId},
-        include:{}
+        include:{
+            interviewer: {
+                id: true,
+                clerkUserId: true,
+                name: true,
+                imageUrl: true,
+                categories: true,
+            },
+        },
+
+        interviewee: {
+            select: {
+                id: true,
+                clerkUserId: true,
+                name: true,
+                imageUrl: true,
+            },
+        },
     });
 };
