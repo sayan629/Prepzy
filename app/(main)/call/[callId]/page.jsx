@@ -1,5 +1,5 @@
 import { getCallData } from '@/actions/call';
-import React from 'react'
+import { notFound, redirect } from 'next/navigation';
 import { toast } from 'sonner';
 
 export default async function CallPage({ params }){
@@ -10,5 +10,12 @@ export default async function CallPage({ params }){
     toast.error("You must be signed in to access this call");
     redirect("/");
   }
-  if()
+  if(result.error === "Call not found"){
+    toast.error("This call does not exist");
+    notFound()
+  }
+  if(result.error === "Forbidden"){
+    redirect("/");
+  }
+  
 };
