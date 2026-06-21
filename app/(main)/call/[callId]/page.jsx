@@ -1,6 +1,7 @@
 import { getCallData } from '@/actions/call';
 import { notFound, redirect } from 'next/navigation';
 import { toast } from 'sonner';
+import CallRoom from './_components/CallRoom';
 
 export default async function CallPage({ params }){
   const { callId } = await params;
