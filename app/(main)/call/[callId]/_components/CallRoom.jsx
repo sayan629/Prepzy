@@ -1,6 +1,7 @@
 "use client";
 
 
+import { StreamVideoClient } from "@stream-io/video-react-sdk";
 import { Loader2 } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useCallback, useEffect, useRef, useState } from "react";
@@ -21,7 +22,21 @@ export default function CallRoom({
     const clientRef = useRef(null);
     const joinedRef = useRef(false);
 
-    useEffect(() => {})
+    useEffect(() => {
+        // Guard against React StrictMode double-invoke in development
+        if(joinedRef.current) return;
+        joinedRef.current = true;
+
+        const client = new StreamVideoClient({
+            apiKey,
+            user:{
+                id: currentUser.id,
+                name: currentUser.name,
+                image: currentUser.imageUrl,
+            },
+            token,
+        });
+    }, []);
 
     const handleLeave = useCallback(() => {
         router.push(isInterviewer ? "/dashboard" : "/appointments");
