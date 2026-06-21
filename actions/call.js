@@ -40,4 +40,9 @@ export const getCallData = async (callId) => {
         process.env.STREAM_SECRET_KEY,
     );
 
+    const token = streamClient.generateUserToken({
+        user_id: user.id,
+        validity_in_seconds: 60 * 60,
+    });
+
 };
