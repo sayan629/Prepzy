@@ -17,5 +17,17 @@ export default async function CallPage({ params }){
   if(result.error === "Forbidden"){
     redirect("/");
   }
-  
-};
+
+  const { token, isInterviewer, currentUser, booking } = result;
+
+  return(
+    <CallRoom 
+      callId = {callId}
+      token = {token}
+      apiKey = {process.env.NEXT_PUBLIC_STREAM_APT_KEY}
+      currentUser = {currentUser}
+      booking = {booking}
+      isInterviewer = {isInterviewer}
+      />
+  );
+}
