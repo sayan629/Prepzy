@@ -1,5 +1,6 @@
 "use server";
 
+import { categories } from "@arcjet/next";
 import { currentUser } from "@clerk/nextjs/server"
 import { StreamClient } from "@stream-io/node-sdk";
 
@@ -44,5 +45,24 @@ export const getCallData = async (callId) => {
         user_id: user.id,
         validity_in_seconds: 60 * 60,
     });
+
+    return {
+        token,
+        isInterviewer,
+        currentUser : {
+            id: user.id,
+            name: `${user.firstName} ${user.lastName}`.trim(),
+            imageUrl: user.imageUrl,
+        },
+
+        booking: {
+            id: booking.id,
+            interviewer: booking.interviewer,
+            interviewee: booking.interviewee,
+            categories: booking.interviewer.categories,
+            startTime: booking.startTime.toISOString(),
+            endTime: booking.endTime.toISOString(),
+        },
+    };
 
 };
