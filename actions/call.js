@@ -1,6 +1,7 @@
 "use server";
 
 import { currentUser } from "@clerk/nextjs/server"
+import { StreamClient } from "@stream-io/node-sdk";
 
 export const getCallData = async (callId) => {
     const user = await currentUser();
@@ -33,4 +34,10 @@ export const getCallData = async (callId) => {
     const isInterviewer = booking.interviewer.clerkUserId === user.id;
     const isInterviewee = booking.interviewee.clerkUserId === user.id;
     if(!isInterviewer && !isInterviewee) return { error: "Forbidden" };
+
+    const streamClient = new StreamClient(
+        process.env.NEXT_PUBLIC_STREAM_API_KEY,
+        process.env.STREAM_SECRET_KEY,
+    );
+
 };
