@@ -1,6 +1,6 @@
 "use client";
 
-import { useCall, useCallStateHooks } from "@stream-io/video-react-sdk";
+import { CallingState, useCall, useCallStateHooks } from "@stream-io/video-react-sdk";
 import "@stream-io/video-react-sdk/dist/css/styles.css";
 import { useEffect, useState } from "react";
 import { useCreateChatClient } from "stream-chat-react";
@@ -58,5 +58,17 @@ export default function CallUI({
             };
     },[chatClient, callId, booking]);
 
+        if(callingState === CallingState.LEFT){
+            return(
+                <div className="min-h-screen bg-[#0a0a0b] flex flex-col items-center justify-center gap-3">
+                    <p className="text-stone-400 text-sm"> Leaving call…</p>
+                </div>
+            );
+        }
 
-}
+    return(
+        <div className="min-h-[92vh] bg-[#0a0a0b] flex flex-col overflow-hidden">
+            {/*... Top bar... */}
+        </div>
+    );
+};
