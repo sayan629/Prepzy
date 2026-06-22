@@ -79,10 +79,22 @@ export default function CallUI({
                             {booking.interviewer.name}
                             <span className="text-stone-700 mx-1.5">×</span>
                             {booking.interviewee.name}
-                        </Badge>
+                    </Badge>
 
-                        
+                    {isInterviewer && (
+                        <Badge
+                            variant="outline"
+                            className= "border-amber-400/20 bg-amber-400/5 text-amber-400 text-xs" >
+                                Interviewer
+                            </Badge>
+                    )}
                  </div>
+            </div>
+
+            <div className="flex flex-1 min-h-0">
+                <div className="flex flex-col flex-1 min-w-0">
+                
+                </div>
             </div>
         </div>
     );
