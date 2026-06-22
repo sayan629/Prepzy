@@ -93,7 +93,15 @@ export default function CallUI({
 
             <div className="flex flex-1 min-h-0">
                 <div className="flex flex-col flex-1 min-w-0">
-                
+                    <div className="flex items-center gap-2">
+                        <Badge
+                            variant="outline"
+                            className="border-white/10 text-stone-500 text-xs">
+                                    {booking.interviewer.name}
+                                    <span className="text-stone-700 mx-1.5">×</span>
+                                    {booking.interviewee.name}
+                            </Badge>
+                    </div>
                 </div>
             </div>
         </div>
