@@ -49,7 +49,21 @@ export default function CallRoom({
                 setCall(callInstance);
             })
             .catch(console.error);
-    }, []);
+
+            return () =>{
+                callInstance.leave().catch(() => {});
+                client.disconnectUser().catch(() => {});
+                clientRef.current = null;
+                joinedRef.current = false;
+            };
+    }, [
+        apiKey,
+        callId,
+        currentUser.id,
+        currentUser.imageUrl,
+        currentUser.name,
+        token,
+    ]);
 
     const handleLeave = useCallback(() => {
         router.push(isInterviewer ? "/dashboard" : "/appointments");
