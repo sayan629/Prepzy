@@ -1,5 +1,6 @@
 "use server";
 
+import { db } from "@/lib/prisma";
 import { categories } from "@arcjet/next";
 import { currentUser } from "@clerk/nextjs/server"
 import { StreamClient } from "@stream-io/node-sdk";
@@ -12,6 +13,7 @@ export const getCallData = async (callId) => {
         where: {streamCallId: callId},
         include:{
             interviewer: {
+                select:{
                 id: true,
                 clerkUserId: true,
                 name: true,
@@ -28,6 +30,7 @@ export const getCallData = async (callId) => {
                 imageUrl: true,
             },
         },
+    },
     });
 
     if(!booking) return {error: "Call not found"};

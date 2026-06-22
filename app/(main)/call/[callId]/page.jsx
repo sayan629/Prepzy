@@ -1,6 +1,6 @@
 import { getCallData } from '@/actions/call';
 import { notFound, redirect } from 'next/navigation';
-import { toast } from 'sonner';
+// import { toast } from 'sonner';
 import CallRoom from './_components/CallRoom';
 
 export default async function CallPage({ params }){
@@ -25,7 +25,7 @@ export default async function CallPage({ params }){
     <CallRoom 
       callId = {callId}
       token = {token}
-      apiKey = {process.env.NEXT_PUBLIC_STREAM_APT_KEY}
+      apiKey = {process.env.NEXT_PUBLIC_STREAM_API_KEY}
       currentUser = {currentUser}
       booking = {booking}
       isInterviewer = {isInterviewer}

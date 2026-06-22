@@ -3,7 +3,7 @@
 import { Badge } from "@/components/ui/badge";
 import { CallControls, CallingState, SpeakerLayout, StreamTheme, useCall, useCallStateHooks } from "@stream-io/video-react-sdk";
 import "@stream-io/video-react-sdk/dist/css/styles.css";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useCreateChatClient } from "stream-chat-react";
 import "stream-chat-react/dist/css/index.css";
 
@@ -35,6 +35,20 @@ export default function CallUI({
             image: currentUser.imageUrl,
         },
     });
+
+    const handleLeave = useCallback(async () => {
+        try {
+            if(call){
+                const isRecording = call.state?.recording;
+                if(isRecording){
+                    await call.stopRecording().catch(() => {});
+                }
+                await call.leave().catch(() => {});
+            }
+        } finally{
+            onLeave();
+        }
+    },[call, onLeave]);
 
     const[chatChannel, setChatChannel] = useState(null);
 

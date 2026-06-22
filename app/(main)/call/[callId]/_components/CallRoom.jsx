@@ -30,6 +30,11 @@ export default function CallRoom({
         if(joinedRef.current) return;
         joinedRef.current = true;
 
+    console.log("apiKey:", apiKey);
+    console.log("token:", token);
+    console.log("currentUser:", currentUser);
+    console.log("callId:", callId);
+
         const client = new StreamVideoClient({
             apiKey,
             user:{
