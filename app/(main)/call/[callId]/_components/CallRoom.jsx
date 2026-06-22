@@ -1,8 +1,8 @@
 "use client";
 
 
-import { StreamVideoClient } from "@stream-io/video-react-sdk";
-import { Loader2 } from "lucide-react";
+import { StreamCall, StreamVideo, StreamVideoClient } from "@stream-io/video-react-sdk";
+import { CalendarPlusIcon, Loader2 } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useCallback, useEffect, useRef, useState } from "react";
 import "@stream-io/video-react-sdk/dist/css/styles.css";
@@ -77,5 +77,18 @@ export default function CallRoom({
             </div>
         );
     }
-    })
+
+    return <StreamVideo client={videoClient}>
+        <StreamCall call={call}>
+            <CallUI
+                callId={callId}
+                isInterviewer={isInterviewer}
+                booking={booking}
+                onLeave={handleLeave}
+                apiKey={apiKey}
+                token={token}
+                currentUser={currentUser}
+            />
+        </StreamCall>
+    </StreamVideo>
 };
