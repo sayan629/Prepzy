@@ -6,7 +6,7 @@ import { CalendarPlusIcon, Loader2 } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useCallback, useEffect, useRef, useState } from "react";
 import "@stream-io/video-react-sdk/dist/css/styles.css";
-import "stream-chat-react/dist/css/v2/index.css";
+import "stream-chat-react/dist/css/index.css";
 import CallUI from "./CallUI";
 
 
@@ -20,7 +20,7 @@ export default function CallRoom({
 }) {
     const router = useRouter();
     const [videoClient, setVideoClient] = useState(null);
-    const [ callId, setCall] = useState(null);
+    const [ call, setCall] = useState(null);
 
     const clientRef = useRef(null);
     const joinedRef = useRef(false);

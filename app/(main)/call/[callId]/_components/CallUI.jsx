@@ -5,7 +5,7 @@ import { CallControls, CallingState, SpeakerLayout, StreamTheme, useCall, useCal
 import "@stream-io/video-react-sdk/dist/css/styles.css";
 import { useEffect, useState } from "react";
 import { useCreateChatClient } from "stream-chat-react";
-import "stream-chat-react/dist/css/v2/index.css";
+import "stream-chat-react/dist/css/index.css";
 
 
 

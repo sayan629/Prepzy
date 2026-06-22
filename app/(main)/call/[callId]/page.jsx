@@ -8,11 +8,11 @@ export default async function CallPage({ params }){
 
   const result = await getCallData(callId);
   if(result.error === "Unauthorized"){
-    toast.error("You must be signed in to access this call");
+    // toast.error("You must be signed in to access this call");
     redirect("/");
   }
   if(result.error === "Call not found"){
-    toast.error("This call does not exist");
+    // toast.error("This call does not exist");
     notFound()
   }
   if(result.error === "Forbidden"){
