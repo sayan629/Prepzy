@@ -1,7 +1,7 @@
 "use client";
 
 import { Badge } from "@/components/ui/badge";
-import { CallingState, useCall, useCallStateHooks } from "@stream-io/video-react-sdk";
+import { CallControls, CallingState, SpeakerLayout, StreamTheme, useCall, useCallStateHooks } from "@stream-io/video-react-sdk";
 import "@stream-io/video-react-sdk/dist/css/styles.css";
 import { useEffect, useState } from "react";
 import { useCreateChatClient } from "stream-chat-react";
@@ -101,7 +101,27 @@ export default function CallUI({
                                     <span className="text-stone-700 mx-1.5">×</span>
                                     {booking.interviewee.name}
                             </Badge>
+
+                            {isInterviewer && (
+                                <Badge
+                                    variant="outline"
+                                    className="border-amber-400/20 bg-amber-400/5 text-amber-400 text-xs">
+                                        Interviewer
+                                    </Badge>
+                            )}
                     </div>
+                </div>
+                
+                {/* Body: video + side panel */}
+                
+                <div className="flex flex-1 min-h-0">
+                {/* ── LEFT: Video ── */}
+                <div className="flex flex-col flex-1 min-w-0">
+                <StreamTheme>
+                    <SpeakerLayout participantBarPosition="bottom" />
+                    <CallControls onLeave={handleLeave} />
+                </StreamTheme>              
+                </div>
                 </div>
             </div>
         </div>
