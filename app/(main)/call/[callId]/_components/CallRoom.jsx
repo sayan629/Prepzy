@@ -5,6 +5,8 @@ import { StreamVideoClient } from "@stream-io/video-react-sdk";
 import { Loader2 } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useCallback, useEffect, useRef, useState } from "react";
+import "@stream-io/video-react-sdk/dist/css/styles.css";
+import "stream-chat-react/dist/css/v2/index.css";
 
 
 export default function CallRoom({
@@ -36,6 +38,17 @@ export default function CallRoom({
             },
             token,
         });
+
+        const callInstance = client.call("default", callId);
+
+        callInstance
+            .join({ create: false})
+            .then(() => {
+                clientRef.current = client;
+                setVideoClient(client);
+                setCall(callInstance);
+            })
+            .catch(console.error);
     }, []);
 
     const handleLeave = useCallback(() => {
