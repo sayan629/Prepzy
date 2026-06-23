@@ -1,9 +1,7 @@
-import React from 'react'
+"use client";
 
-const AIQuestionsPanel = () => {
-  return (
-    <div>AIQuestionsPanel</div>
-  )
-}
 
-export default AIQuestionsPanel
+export default function AIQuestionsPanel({ categories }){
+  
+  return <div></div>
+};
