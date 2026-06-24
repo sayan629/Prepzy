@@ -1,5 +1,7 @@
 "use server";
 
+import { currentUser } from "@clerk/nextjs/server";
+
 const CATEGORY_PROMPTS = {
   FRONTEND: "React, JavaScript, CSS, performance, accessibility, browser APIs",
   BACKEND:
@@ -14,4 +16,12 @@ const CATEGORY_PROMPTS = {
   DEVOPS: "CI/CD, Docker, Kubernetes, cloud infrastructure, monitoring",
   MOBILE:
     "React Native, iOS/Android, performance, offline support, app lifecycle",
+};
+
+export const generateInterviewQuestions = async ({category}) => {
+    const user = await currentUser();
+    if (!user) throw new Error("Unauhtorized");
+
+    if(!category || !CATEGORY_PROMPTS[category])
+        throw new Error ("Invalid Category");
 };
