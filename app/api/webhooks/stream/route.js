@@ -135,7 +135,25 @@ export async function POST(request) {
                                     .replace(/^```json|^```|```$/gm, "")
                                     .trim();
 
-                                    
+                                const feedbackData = JSON.parse(raw);
+
+                                    await db.transaction([
+                                        db.feedback.upsert({
+                                            where: { bookingId: booking.id },
+                                            create: {
+                                                bookingId: booking.id,
+                                                summary: feedbackData.summary,
+                                                technical: feedbackData.technical,
+                                                communication: feedbackData.communication,
+                                                problemSolving: feedbackData.problemSolving,
+                                                recommendation: feedbackData.recommendation,
+                                                strengths: feedbackData.strengths,
+                                                improvements: feedbackData.improvements,
+                                                overallRating: feedbackData.overallRating,                
+                                            },
+                                            update: {}, // // already exists — no-op, keep the original 
+                                        }),
+                                    ]);
         }   
     } catch(error){
 
