@@ -54,6 +54,23 @@ export default function AIQuestionsPanel({ categories }){
                 </>
               )}
             </Button>
+
+            {/* Questions list */}
+
+            {questions.length > 0 ? (
+              <div className="flex flex-col gap-3 overflow-y-auto flex-1 pr-1">
+                {questions.map((q, i) => (
+                  <div 
+                    key={i}
+                    className="rounded-xl border border-white/8 bg-[#141417] p-4 flex flex-col gap-2"
+                    ></div>
+                ))}
+              </div>
+            ) : (
+              <div className="flex-1 flex flex-col items-center justify-center gap-2 text-center">
+                <span className=""
+            )
+            )}
       </div>
 
 
