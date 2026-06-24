@@ -61,6 +61,26 @@ export async function POST(request) {
             if(!transcriptUrl){
                 return Response.json({ ok:true });
             }
+
+            // 1. Download JSONL from Stream CDN
+
+            const transcriptRes = await fetch(transcriptUrl);
+            const transcriptText = await transcriptRes.text();
+
+            // 2. Parse JSONL into readable conversation
+            const lines = transcriptText
+                .trim()
+                .split("\n")
+                .filter(Boolean)
+                .map((line) => {
+                    try{
+                        return JSON.parse(line);
+                    } catch{
+                        return null;
+                    }
+                })
+                .filter((entry) => entry?.type === "speech");
+
         }
     } catch(error){
 
