@@ -4,6 +4,7 @@ import { generateInterviewQuestions } from "@/actions/aiQuestions";
 import { Button } from "@/components/ui/button";
 import useFetch from "@/hooks/use-fetch";
 import { CATEGORY_LABEL } from "@/lib/data";
+import { Loader2, Sparkles } from "lucide-react";
 import { useState } from "react";
 
 
@@ -16,10 +17,10 @@ export default function AIQuestionsPanel({ categories }){
       const { data, loading, error, fn:generateFn } = useFetch(generateInterviewQuestions);
       const questions = data?.questions ?? [];
 
-      return <div className="flex flex-col gap-4 h-full overflow-hidden">
+      return <div className="flex flex-col gap-4 h-full overflow-hidden p-3">
             <div className="flex flex-wrap gap-1.5">
               {categories?.map((cat) =>(
-                <Button
+                <button
                   key={cat}
                   type = "button"
                   onClick={() => setSelectedCategory(cat)}
@@ -30,9 +31,29 @@ export default function AIQuestionsPanel({ categories }){
                     }`}
                     >
                       {CATEGORY_LABEL[cat] ?? cat}
-                    </Button>
+                    </button>
               ))}
             </div>
+
+            <Button
+              variant="gold"
+              size = "sm"
+              disabled = {loading || !selectedCategory}
+              onClick= {() => generateFn({ category: selectedCategory })}
+              className="self-start gap-2"
+            >
+              {loading ? (
+                <>
+                <Loader2 size={13} className="animate-spin" />
+                Generating…
+                </>
+              ) : (
+                <>
+                <Sparkles size={13} />
+                Generate Questions
+                </>
+              )}
+            </Button>
       </div>
 
 
