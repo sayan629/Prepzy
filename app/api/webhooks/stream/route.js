@@ -81,6 +81,17 @@ export async function POST(request) {
                 })
                 .filter((entry) => entry?.type === "speech");
 
+                if(lines.length === 0){
+                    return Response.json({ ok:true });
+                }
+
+                // Map clerkUserId to display name
+                const speakerMap = {
+                    [booking.interviewer.clerkUserId]:
+                        booking.interviewer.name ?? "Interviewer",
+                    [booking.interviewee.clerkUserId]:
+                        booking.interviewee.name ?? "Interviewee",
+                };               
         }
     } catch(error){
 
