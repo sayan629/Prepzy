@@ -14,19 +14,14 @@ import {
 import "@stream-io/video-react-sdk/dist/css/styles.css";
 
 // Stream Chat
-import {
-  Chat,
-  Channel,
-  MessageList,
-  MessageInput,
-  Window,
-  useCreateChatClient,
-} from "stream-chat-react";
-import "stream-chat-react/dist/css/v2/index.css";
+
+import "stream-chat-react/dist/css/index.css";
 
 import { Badge } from "@/components/ui/badge";
 import { MessageSquare, Sparkles, Loader2 } from "lucide-react";
-import AIQuestionsPanel from "./AIQuestions";
+import AIQuestionsPanel from "./AIQuestionsPanel";
+import { Channel, Chat, MessageList, useCreateChatClient, Window} from "stream-chat-react";
+
 
 // ─── Call UI (inside StreamCall context) ─────────────────────────────────────
 
@@ -178,7 +173,7 @@ export default function CallUI({
                   <Channel channel={chatChannel}>
                     <Window>
                       <MessageList />
-                      <MessageInput focus />
+                      <MessageComposer/>
                     </Window>
                   </Channel>
                 </Chat>
