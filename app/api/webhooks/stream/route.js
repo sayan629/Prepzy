@@ -10,16 +10,21 @@ export async function POST(request) {
         eventType !== "call.transcription_ready" &&
         eventType !== "call.recording_ready"
     ){
-    return Response.json({ ok: true });
+        console.log(`[stream-webhook] Ignoring event type: ${eventType}`);
+        return Response.json({ ok: true });
     }
     const callCid = body.call_cid ?? "";
     const streamCallId = callCid.includes(":") ? callCid.split(":")[1] : callCid;
-
+    
+    console.log(`[stream-webhook] call_cid: ${callCid} → streamCallId: ${streamCallId}` );
+    
     if(!streamCallId){
+        console.log(`[stream-webhook] No streamCallId found, skipping`);
        return Response.json({ ok: true });
     }
 
     try{
+        console.log(`[stream-webhook] Looking up booking in DB...`);
         const booking = await db.booking.findUnique({
         where: { streamCallId },
         include: {
