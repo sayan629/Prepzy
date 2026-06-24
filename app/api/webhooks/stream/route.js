@@ -39,21 +39,28 @@ export async function POST(request) {
         });  
         
         if(!booking){
+            console.log(`[stream-webhook] No booking found for streamCallId: ${streamCallId}`);
             return Response.json({ ok: true });
         }
+
+        console.log(`[stream-webhook] Booking found: ${booking.id} | interviewer: ${booking.interviewer.name} | interviewee: ${booking.interviewee.name}`);
 
         // ------- Recording ------
         if (eventType === "call.recording_ready"){
             const recordingUrl = body.call_recording?.url;
 
             if(!recordingUrl){
+                console.log(`[stream-webhook] call.recording_ready received but no URL in payload`);
                 return Response.json({ ok: true });
             }
 
+            console.log(`[stream-webhook] Saving recording URL to booking...`);
             await db.booking.update({
                 where: { id: booking.id},
                 data: { recordingUrl },
             });
+
+            console.log(`[stream-webhook] ✓ Recording URL saved for booking ${booking.id}`);
             return Response.json({ ok:true });
         }
 
