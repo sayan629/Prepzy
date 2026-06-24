@@ -137,7 +137,7 @@ export default function CallUI({
                   <MessageSquare size={13} />
                 Chat
                 </TabsTrigger>
-                {true && 
+                {true &&   //true -> isInterviewer
                 ( <TabsTrigger value="questions" className={"w-1/2 h-6 py-2"}>
                     <Sparkles size={13} />
                     AI Questions 
