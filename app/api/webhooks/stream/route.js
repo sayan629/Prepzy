@@ -1,4 +1,5 @@
 import { db } from "@/lib/prisma";
+import { GoogleGenerativeAI } from "@google/generative-ai";
 
 
 export async function POST(request) {
@@ -91,8 +92,43 @@ export async function POST(request) {
                         booking.interviewer.name ?? "Interviewer",
                     [booking.interviewee.clerkUserId]:
                         booking.interviewee.name ?? "Interviewee",
-                };               
-        }
+                };
+                
+                    const transcript = lines
+                    .map((l) => `${speakerMap[l.speaker_id] ?? l.speaker_id}: ${l.text}`)
+                    .join("\n");
+
+            // 2. Generate Feedback via Gemini
+                
+                const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
+                const model = genAI.getGenerativeModel({
+                    model:"gemini-2.5-flash-lite",
+                });
+
+                const categories = booking.interviewer.categories?.join(", ") ?? "General";
+
+                const prompt = `You are an expert technical interviewer evaluating a mock interview.
+
+                                Interview categories: ${categories}
+                                Interviewer: ${booking.interviewer.name}
+                                Candidate: ${booking.interviewee.name}
+
+                                TRANSCRIPT:
+                                ${transcript}
+
+                                Analyze the candidate's performance. Respond ONLY with a valid JSON object, no markdown, no backticks, no explanation:
+                                {
+                                "summary": "2-3 sentence overall summary of the session",
+                                "technical": "Assessment of technical knowledge and accuracy",
+                                "communication": "Assessment of clarity, structure, and communication style",
+                                "problemSolving": "Assessment of problem-solving approach and thought process",
+                                "recommendation": "HIRE / CONSIDER / NO_HIRE with a one-sentence reason",
+                                "strengths": ["strength 1", "strength 2", "strength 3"],
+                                "improvements": ["improvement 1", "improvement 2", "improvement 3"],
+                                "overallRating": "POOR or AVERAGE or GOOD or EXCELLENT"
+                                }`;
+                                
+        }   
     } catch(error){
 
     }
