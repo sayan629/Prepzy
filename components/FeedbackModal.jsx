@@ -100,7 +100,7 @@ export function FeedbackModal ({open, onOpenChange, feedback, intervieweeName,})
             </div>
 
             {/* Srengths & improvements */}
-            <div classname = 'grid grid-cols-2 gap-3'>
+            <div className = 'grid grid-cols-2 gap-3'>
                 <div className='bg-[#141417] border border-white/8 rounded-xl p-5'>
                     <div className='flex items-center gap-2 mb-3'>
                         <CheckCircle2 size={13} className='text-green-400'/>
