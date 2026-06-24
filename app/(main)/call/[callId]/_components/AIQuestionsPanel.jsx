@@ -63,18 +63,21 @@ export default function AIQuestionsPanel({ categories }){
                   <div 
                     key={i}
                     className="rounded-xl border border-white/8 bg-[#141417] p-4 flex flex-col gap-2"
-                    ></div>
+                    >
+                      <p className=""
+                    </div>
                 ))}
               </div>
             ) : (
               <div className="flex-1 flex flex-col items-center justify-center gap-2 text-center">
-                <span className=""
-            )
+                <span className="w-10 h-10 rounded-xl bg-amber-400/10 border border-amber-400/20 flex items-center justify-center">
+                <Sparkles size={16} className="text-amber-400"/>
+                </span>
+                <p className="text-xs text-stone-600">
+                  Select a category and generate role-specific questions for this
+                  session.
+                </p>
+                </div>
             )}
       </div>
-
-
-
-
-  return <div></div>
 };
