@@ -248,7 +248,7 @@ Analyze the candidate's performance. Respond ONLY with a valid JSON object, no m
     }
 
     return Response.json({ ok: true });
-  } catch (err) {
+  } catch (error) {
     console.error(`[stream-webhook] ✗ ${eventType} error:`, err);
     // Always 200 — non-2xx triggers Stream retries, making the race worse
     return Response.json({ ok: true });
