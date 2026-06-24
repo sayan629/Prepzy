@@ -127,7 +127,15 @@ export async function POST(request) {
                                 "improvements": ["improvement 1", "improvement 2", "improvement 3"],
                                 "overallRating": "POOR or AVERAGE or GOOD or EXCELLENT"
                                 }`;
-                                
+
+                                const result = await model.generateContent(prompt);
+                                const raw = result.response
+                                    .text()
+                                    .trim()
+                                    .replace(/^```json|^```|```$/gm, "")
+                                    .trim();
+
+                                    
         }   
     } catch(error){
 
