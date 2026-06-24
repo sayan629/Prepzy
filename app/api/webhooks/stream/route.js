@@ -174,9 +174,14 @@ export async function POST(request) {
                                                     bookingId: booking.id,
                                                 },
                                             });
-                                        }
+                                       }
         }   
+
+        return Response.json({ ok: true });
     } catch(error){
+        console.error(`[stream-webhook] ✗ ${eventType} error:`, err);
+        // Always 200 — non-2xx triggers Stream retries, making the race worse
+        return Response.json({ ok: true });      
 
     }
 }
