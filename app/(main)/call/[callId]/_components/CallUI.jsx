@@ -137,7 +137,7 @@ export default function CallUI({
                   <MessageSquare size={13} />
                 Chat
                 </TabsTrigger>
-                {isInterviewer && 
+                {true && 
                 ( <TabsTrigger value="questions" className={"w-1/2 h-6 py-2"}>
                     <Sparkles size={13} />
                     AI Questions 
@@ -156,10 +156,11 @@ export default function CallUI({
               ):(
               <div className= "flex items-center justify-center h-full">
                 <Loader2 size={18} className="text-stone-600 animate-spin" />
-                </div>)}
+                </div>
+              )}
                 </TabsContent>
               <TabsContent value="questions">
-                Change your password here.
+                <AIQuestionsPanel categories={booking.categories} />
                 </TabsContent>
           </Tabs>
         </div>

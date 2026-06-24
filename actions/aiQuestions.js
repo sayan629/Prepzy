@@ -29,7 +29,7 @@ export const generateInterviewQuestions = async ({category}) => {
 
     const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
     const model = genAI.getGenerativeModel({
-        model: "gemini-3.5-flash-lite",  //2.5 
+        model: "gemini-2.5-flash-lite",  //2.5 
     });
 
         const prompt = `You are an expert technical interviewer. Generate 6 interview questions for a ${category} role covering: ${CATEGORY_PROMPTS[category]}.
