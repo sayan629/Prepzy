@@ -153,7 +153,28 @@ export async function POST(request) {
                                             },
                                             update: {}, // // already exists — no-op, keep the original 
                                         }),
+
+                                        db.booking.update({
+                                            where: { id: booking.id },
+                                            data: { status: "COMPLETED" },
+                                        }),
                                     ]);
+
+                                    // Credit Transaction is outside the main transaction so we can check first
+                                        const earnExists = await db.creditTransaction.findFirst({
+                                        where: { bookingId: booking.id, type: "BOOKING_EARNING" },
+                                    });
+
+                                        if(!earnExists){
+                                            await db.creditTransaction.create({
+                                                data: {
+                                                    userId: booking.interviewer.id,
+                                                    amount: booking.creditsCharged,
+                                                    type: "BOOKING_EARNING",
+                                                    bookingId: booking.id,
+                                                },
+                                            });
+                                        }
         }   
     } catch(error){
 
