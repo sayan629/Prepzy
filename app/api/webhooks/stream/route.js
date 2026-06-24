@@ -37,7 +37,31 @@ export async function POST(request) {
         }
 
         // ------- Recording ------
-        
+        if (eventType === "call.recording_ready"){
+            const recordingUrl = body.call_recording?.url;
+
+            if(!recordingUrl){
+                return Response.json({ ok: true });
+            }
+
+            await db.booking.update({
+                where: { id: booking.id},
+                data: { recordingUrl },
+            });
+            return Response.json({ ok:true });
+        }
+
+        //----- Transcription -------
+        if (eventType === "call.transcription_ready"){
+            if(!booking.feedback){
+                return Response.json({ ok:true });
+            }
+
+            const transcriptUrl = body.call_transcription?.url;
+            if(!transcriptUrl){
+                return Response.json({ ok:true });
+            }
+        }
     } catch(error){
 
     }
