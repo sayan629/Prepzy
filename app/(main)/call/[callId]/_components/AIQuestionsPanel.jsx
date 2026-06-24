@@ -3,6 +3,7 @@
 import { generateInterviewQuestions } from "@/actions/aiQuestions";
 import { Button } from "@/components/ui/button";
 import useFetch from "@/hooks/use-fetch";
+import { CATEGORY_LABEL } from "@/lib/data";
 import { useState } from "react";
 
 
@@ -27,6 +28,9 @@ export default function AIQuestionsPanel({ categories }){
                       ? "border-amber-400/40 bg-amber-400/10 text-amber-400"
                       : "border-white/10 text-stone-500 hover:border-white/20 hover:text-stone-400"
                     }`}
+                    >
+                      {CATEGORY_LABEL[cat] ?? cat}
+                    </Button>
               ))}
             </div>
       </div>
