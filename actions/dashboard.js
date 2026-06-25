@@ -63,5 +63,30 @@ export const getAvailability = async () => {
        const dbUser = await db.user.findUnique({ where: {clerkUserId:user.id }});
         if (!dbUser) throw new Error("user not found");
 
-        
+        return db.booking.findMany({
+            where: { interviewerId: dbUser.id },
+            include: {
+                interviewee: { select : { name: true, imageUrl:true, email: true }},
+                feedback: true,
+            },
+            orderBy: { startTime: "desc" },
+        });      
+    };
+
+    export const getInterviewerStats = async () => {
+        const user = await currentUser(); 
+        if (!user) throw new Error("Unauthorized");
+
+        const dbUser = await db.user.findUnique({
+            where: { clerkUserId: user.id },
+            select:{
+                creditBalance: true,
+                creditRate: true,
+                bookingAsInterviewer: {
+                    where: { status: "COMPLETED" },
+                    select: { creditsCharged: true },
+                },
+            },
+        });
+
     }
