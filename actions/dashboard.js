@@ -49,7 +49,7 @@ export const getAvailability = async () => {
     if (!user) throw new Error("Unauthorized");
 
     const dbUser = await db.user.findUnique({ where: {clerkUserId:user.id }});
-    if (!dbUser) throw new Error("user not found");
+    if (!dbUser) throw new Error("User not found");
 
     return db.availability.findFirst({
         where: { interviewerId: dbUser.id, status: "AVAILABLE "},
@@ -61,7 +61,7 @@ export const getAvailability = async () => {
        if (!user) throw new Error("Unauthorized");
     
        const dbUser = await db.user.findUnique({ where: {clerkUserId:user.id }});
-        if (!dbUser) throw new Error("user not found");
+        if (!dbUser) throw new Error("User not found");
 
         return db.booking.findMany({
             where: { interviewerId: dbUser.id },
@@ -89,4 +89,17 @@ export const getAvailability = async () => {
             },
         });
 
-    }
+        if(!dbUser) throw new Error("User not found");
+
+        const totalEarned = dbUser.bookingsAsInterviewer.reduce(
+            (sum, b) => sum+b.creditsCharged,
+            0,
+        );
+
+        return{
+            creditBalance: dbUser.creditBalance,
+            creditRate: dbUser.creditRate,
+            totalEarned,
+            completedSessions: dbUser.bookingAsInterviewer.length,
+        };
+    };
