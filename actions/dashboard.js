@@ -44,3 +44,24 @@ export const setAvailability = async ({ startTime, endTime }) => {
     }
 };
 
+export const getAvailability = async () => {
+    const user = await currentUser();
+    if (!user) throw new Error("Unauthorized");
+
+    const dbUser = await db.user.findUnique({ where: {clerkUserId:user.id }});
+    if (!dbUser) throw new Error("user not found");
+
+    return db.availability.findFirst({
+        where: { interviewerId: dbUser.id, status: "AVAILABLE "},
+    });
+};
+
+    export const getInterviewerAppointments = async () =>{
+       const user = await currentUser(); 
+       if (!user) throw new Error("Unauthorized");
+    
+       const dbUser = await db.user.findUnique({ where: {clerkUserId:user.id }});
+        if (!dbUser) throw new Error("user not found");
+
+        
+    }
