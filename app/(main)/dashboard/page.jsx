@@ -25,7 +25,15 @@ export default async function InterviewerDashboardPage() {
                 dbUser.title && dbUser.comapny
                     ? `${dbUser.title} · ${dbUser.comapny}` : undefined
             }
-            
+            right={
+                <div>
+                    <p className="text-xs text-stone-600">Credit Balance</p>
+                    <p className="font-serif text-3xl leading-none bg-linear-to-br from-amber-300 to-amber-500 bg-clip-text text-transparent text-right">
+                        {stats?.creditBalance ?? 0}
+                    </p>
+                </div>
+            }
+            />
     </main>
 
 };
