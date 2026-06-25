@@ -1,6 +1,7 @@
 "use server";
 import { db } from "@/lib/prisma";
 import { currentUser } from "@clerk/nextjs/server"
+import { revalidatePath } from "next/cache";
 
 
 export const setAvailability = async ({ startTime, endTime }) => {
@@ -34,7 +35,12 @@ export const setAvailability = async ({ startTime, endTime }) => {
                 },
             });
         }
-    } catch (error) {
 
+        revalidatePath("/dashboard");
+        return { success: true };
+    } catch (error) {
+        console.error(error);
+        throw new Error("Failed to save availability");
     }
-}
+};
+
