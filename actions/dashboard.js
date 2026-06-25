@@ -16,8 +16,24 @@ export const setAvailability = async ({ startTime, endTime }) => {
 
     try {
         const existing = await db.availability.findFirst({
-            where: { interviewerId: dbUser.id, status:"AVAILABLE"},
+            where: { interviewerId: dbUser.id, status:"AVAILABLE" },
         });
+    
+        if(existing){
+            await db.availability.update({
+                where: {id:existing.id},
+                data: { startTime: new Date(startTime), endTime: new Date(endTime)},
+            });
+        } else{
+            await db.availability.create({
+                data:{
+                    interviewerId: dbUser.id,
+                    startTime: new Date(startTime),
+                    endTime: new Date(endTime),
+                    status: "AVAILABLE",
+                },
+            });
+        }
     } catch (error) {
 
     }
