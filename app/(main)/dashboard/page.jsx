@@ -67,7 +67,7 @@ export default async function InterviewerDashboardPage() {
                     </TabsContent>
 
                     <TabsContent value="earnings">
-                        <EarningsSection stats={stats} history= {withdrawalHistory} />
+                        <EarningsSection stats={stats}/>
                     </TabsContent>
                 </Tabs>
             </div>
