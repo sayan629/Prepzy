@@ -2,6 +2,9 @@
 
 import { setAvailability } from "@/actions/dashboard";
 import { GrayTitle } from "@/components/reusables";
+import { Badge } from "@/components/ui/badge";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 import useFetch from "@/hooks/use-fetch";
 import { Clock } from "lucide-react";
 import { useState } from "react";
@@ -34,11 +37,33 @@ export default function AvailabilitySection( { initial }){
                     </span>
 
                     <h2 className="font-serif text-xl tracking-tight">
-                        <GrayTitle>Daily availability window </GrayTitle>
+                        <GrayTitle>Daily Availability </GrayTitle>
                     </h2>
                      <p className="text-xs text-stone-500 font-light mt-1">
-                        Interviewees can book within this window every day.
+                        Set the hours during which interviewees can book you each day.
                      </p>
+                </div>
+
+                {initial && (
+                    <Badge
+                        variant="outline"
+                        className="shrink-0 border-green-500/20 bg-green-500/10 text-green-400"
+                        >
+                            Active
+                        </Badge>
+                )}
+            </div>
+
+            <div className="h-px bg-white/5" />
+            
+            <div className="grid grid-cols-2 gap-4">
+                <div className="flex flex-col gap-4">
+                    <Label className="text-stone-400 text-xs">Start Time</Label>
+                    <Input
+                        type="time"
+                        value = {startTime}
+                        onChange = {(e) => setStartTime(e.target.value)}
+                        className="bg-[#141417] border-white/10 text-stone-100" />
                 </div>
             </div>
         </section>
