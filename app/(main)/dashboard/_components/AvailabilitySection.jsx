@@ -8,7 +8,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import useFetch from "@/hooks/use-fetch";
 import { Clock } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 
 export default function AvailabilitySection( { initial }){
@@ -27,13 +27,21 @@ export default function AvailabilitySection( { initial }){
     const [saved, setSaved ] = useState(false);
     const { data, loading, error, fn:saveFn } = useFetch(setAvailability);
 
+    useEffect(() => {
+        if (data?.success){
+            setSaved(true);
+            const t = setTimeout(() => setSaved(false), 3000);
+            return () => clearTimeout(t);
+        }
+    }, [data]);
+
     const toISO = (time) => {
         const [h,m] = time.split(":").map(Number);
         const d = new Date();
         d.setHours(h, m, 0, 0);
         return d.toISOString();
     };
-    
+
     const handleSave = () => {
         if(!startTime || !endTime) return;
         saveFn({ startTime: toISO(startTime), endTime: toISO(endTime) });
