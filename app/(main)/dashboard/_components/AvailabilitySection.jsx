@@ -29,6 +29,7 @@ export default function AvailabilitySection( { initial }){
 
     useEffect(() => {
         if (data?.success){
+            // eslit-diasble-next-line react-hooks / set-state-in- effect
             setSaved(true);
             const t = setTimeout(() => setSaved(false), 3000);
             return () => clearTimeout(t);
