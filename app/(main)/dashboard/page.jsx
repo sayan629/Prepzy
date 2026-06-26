@@ -1,6 +1,7 @@
 import { getAvailability, getInterviewerAppointments, getInterviewerStats } from "@/actions/dashboard";
 import { getCurrentUser } from "@/actions/user";
 import PageHeader from "@/components/reusables";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 
 
@@ -22,8 +23,8 @@ export default async function InterviewerDashboardPage() {
             gray = "Welcome Back,"
             gold = {dbUser.name?.split(" ")[0] ?? "Interviewer"}
             description={
-                dbUser.title && dbUser.comapny
-                    ? `${dbUser.title} · ${dbUser.comapny}` : undefined
+                dbUser.title && dbUser.company
+                    ? `${dbUser.title} · ${dbUser.company}` : undefined
             }
             right={
                 <div>
@@ -34,6 +35,17 @@ export default async function InterviewerDashboardPage() {
                 </div>
             }
             />
+
+            <div className="max-w-6xl mx-auto px-8 py-10">
+                <Tabs defaultValue="account" className="w-[400px]">
+                    <TabsList>
+                        <TabsTrigger value="account">Account</TabsTrigger>
+                        <TabsTrigger value="password">Password</TabsTrigger>
+                    </TabsList>
+                    <TabsContent value="account">Make changes to your account here.</TabsContent>
+                    <TabsContent value="password">Change your password here.</TabsContent>
+                </Tabs>
+            </div>
     </main>
 
 };
