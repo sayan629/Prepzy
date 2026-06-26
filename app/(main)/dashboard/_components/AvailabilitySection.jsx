@@ -90,6 +90,7 @@ export default function AvailabilitySection( { initial }){
 
             <div className="h-px bg-white/5" />
             
+            {/* Time Input */}
             <div className="grid grid-cols-2 gap-4">
                 <div className="flex flex-col gap-2">
                     <Label className="text-stone-400 text-xs">Start Time</Label>

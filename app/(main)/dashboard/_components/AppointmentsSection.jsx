@@ -1,9 +1,11 @@
 import React from 'react'
 
-const AppointmentsSection = () => {
-  return (
-    <div>AppointmentsSection</div>
-  )
+export default function AppointmentsSection({ appointments }){
+    const now = new Date();
+    const scheduled = appointments.filter(
+        (a) => a.status === "SCHEDULED" && new Date(a.startTime) > now
+    );
+    const past = appointments.filter(
+        (a) => 
+    )
 }
-
-export default AppointmentsSection
