@@ -2,6 +2,7 @@ import { getAvailability, getInterviewerAppointments, getInterviewerStats } from
 import { getCurrentUser } from "@/actions/user";
 import PageHeader from "@/components/reusables";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { ClipboardList, Clock, Wallet } from "lucide-react";
 
 
 
@@ -39,8 +40,19 @@ export default async function InterviewerDashboardPage() {
             <div className="max-w-6xl mx-auto px-8 py-10">
                 <Tabs defaultValue="earnings">
                     <TabsList className="bg-[#0f0f11] border border-white/10 mb-8 w-full">
-                        <TabsTrigger value="account">Account</TabsTrigger>
-                        <TabsTrigger value="password">Password</TabsTrigger>
+                        <TabsTrigger value="earnings" className="p-5">
+                            <Wallet size={16} className="text-amber-400"/> Earnings 
+                        </TabsTrigger>
+
+                        <TabsTrigger value="appointments" className="p-5">
+                            <ClipboardList size={18} className="text-amber-400" /> {" "}
+                            Appointments
+                        </TabsTrigger>
+
+                        <TabsTrigger value="availability" className="p-5">
+                            <Clock size={18} className="text-amber-400" />
+                            Availability
+                        </TabsTrigger>
                     </TabsList>
                     <TabsContent value="account">Make changes to your account here.</TabsContent>
                     <TabsContent value="password">Change your password here.</TabsContent>
