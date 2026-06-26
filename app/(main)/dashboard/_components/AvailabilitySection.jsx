@@ -27,6 +27,11 @@ export default function AvailabilitySection( { initial }){
     const [saved, setSaved ] = useState(false);
     const { data, loading, error, fn:saveFn } = useFetch(setAvailability);
 
+    const handleSave = () => {
+        if(!startTime || !endTime) return;
+        saveFn({ startTime: toISO(startTime), endTime: toISO(endTime) });
+    };
+
     const hasWindow = startTime && endTime;
     const duration = hasWindow
     ? (() => {
