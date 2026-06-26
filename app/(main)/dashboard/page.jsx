@@ -3,6 +3,9 @@ import { getCurrentUser } from "@/actions/user";
 import PageHeader from "@/components/reusables";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { ClipboardList, Clock, Wallet } from "lucide-react";
+import AppointmentsSection from "./_components/AppointmentsSection";
+import AvailabilitySection from "./_components/AvailabilitySection";
+import EarningsSection from "./_components/EarningsSection";
 
 
 
@@ -64,7 +67,7 @@ export default async function InterviewerDashboardPage() {
                     </TabsContent>
 
                     <TabsContent value="earnings">
-                        <EarningsSection stats={stats} history={withdrawaHistory} />
+                        <EarningsSection stats={stats} history= {withdrawalHistory} />
                     </TabsContent>
                 </Tabs>
             </div>
