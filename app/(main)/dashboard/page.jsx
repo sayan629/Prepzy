@@ -37,8 +37,8 @@ export default async function InterviewerDashboardPage() {
             />
 
             <div className="max-w-6xl mx-auto px-8 py-10">
-                <Tabs defaultValue="account" className="w-[400px]">
-                    <TabsList>
+                <Tabs defaultValue="earnings">
+                    <TabsList className="bg-[#0f0f11] border border-white/10 mb-8 w-full">
                         <TabsTrigger value="account">Account</TabsTrigger>
                         <TabsTrigger value="password">Password</TabsTrigger>
                     </TabsList>
