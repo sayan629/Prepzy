@@ -54,8 +54,18 @@ export default async function InterviewerDashboardPage() {
                             Availability
                         </TabsTrigger>
                     </TabsList>
-                    <TabsContent value="account">Make changes to your account here.</TabsContent>
-                    <TabsContent value="password">Change your password here.</TabsContent>
+
+                    <TabsContent value="appointments">
+                        <AppointmentsSection appointments={appointments} />
+                    </TabsContent>
+
+                    <TabsContent value="availability">
+                        <AvailabilitySection initial = {avaialability} />
+                    </TabsContent>
+
+                    <TabsContent value="earnings">
+                        <EarningsSection stats={stats} history={withdrawaHistory} />
+                    </TabsContent>
                 </Tabs>
             </div>
     </main>
