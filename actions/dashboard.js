@@ -48,11 +48,11 @@ export const getAvailability = async () => {
     const user = await currentUser();
     if (!user) throw new Error("Unauthorized");
 
-    const dbUser = await db.user.findUnique({ where: {clerkUserId:user.id }});
+    const dbUser = await db.user.findUnique({ where: { clerkUserId: user.id }});
     if (!dbUser) throw new Error("User not found");
 
     return db.availability.findFirst({
-        where: { interviewerId: dbUser.id, status: "AVAILABLE "},
+        where: { interviewerId: dbUser.id, status: "AVAILABLE"},
     });
 };
 
@@ -82,7 +82,7 @@ export const getAvailability = async () => {
             select:{
                 creditBalance: true,
                 creditRate: true,
-                bookingAsInterviewer: {
+                bookingsAsInterviewer: {
                     where: { status: "COMPLETED" },
                     select: { creditsCharged: true },
                 },
@@ -100,6 +100,6 @@ export const getAvailability = async () => {
             creditBalance: dbUser.creditBalance,
             creditRate: dbUser.creditRate,
             totalEarned,
-            completedSessions: dbUser.bookingAsInterviewer.length,
+            completedSessions: dbUser.bookingsAsInterviewer.length,
         };
     };
