@@ -46,9 +46,14 @@ export default function EarningsSection( { stats, history }){
               >
                 {stat.value}
               </p>
+                <p className="text-xs text-stone-600">{stat.unit}</p>
+                <p className="text-xs text-stone-500">
+                  {stat.label}{" "}
+                  {stat.dollarValue !== undefined
+                    ? `($${stat?.dollarValue?.toFixed(2)})`
+                    : ""}
+                </p>
             </div>
-          
-
         ))}
       </div>
     </section>
