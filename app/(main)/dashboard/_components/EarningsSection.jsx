@@ -34,7 +34,22 @@ export default function EarningsSection( { stats, history }){
             gold: false,
             icon: <CircleCheck size={16} className="text-stone-400"/>
           },
-        ]}
+        ].map((stat) => (
+          <div 
+            key = {stat.label} className="bg-[#0f0f11] border border-white/10 rounded-2xl p-6 flex flex-col gap-2">
+              <span className="text-lg">{stat.icon}</span>
+              <p className={`font-serif text-4xl leading-none tracking-tight &{
+                stat.gold
+                  ? "bg-linear-to-br from-amber-300 to-amber-500 bg-clip-text text-transparent"
+                  : "bg-linear-to-br from-stone-100 to-stone-400 bg-clip-text text-transparent"
+              }`}
+              >
+                {stat.value}
+              </p>
+            </div>
+          
+
+        ))}
       </div>
     </section>
 }
