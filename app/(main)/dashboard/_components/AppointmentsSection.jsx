@@ -1,6 +1,7 @@
+import { AppointmentCard } from '@/components/AppointmentCard';
 import { GrayTitle } from '@/components/reusables';
 import { ClipboardList } from 'lucide-react';
-import React from 'react'
+
 
 export default function AppointmentsSection({ appointments }){
     const now = new Date();
@@ -26,36 +27,33 @@ export default function AppointmentsSection({ appointments }){
             </div>
                     {/* ── Upcoming ── */}
                     {scheduled.length > 0 && (
-                      <div className="flex flex-col gap-5">
                         <div className="flex items-center gap-4">
                           <p className="text-xs font-semibold text-stone-500 tracking-widest uppercase">
                             Upcoming ({scheduled.length})
                           </p>
                           <div className="flex-1 h-px bg-white/5" />
-                        </div>
                         <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
                           {scheduled.map((b) => (
-                            <AppointmentCard key={b.id} booking={b} mode="interviewee" />
+                            <AppointmentCard key={b.id} booking={b} mode="interviewer" />
                           ))}
                         </div>
-                      </div>
+                        </div>
                     )}
             
                     {/* ── Past ── */}
                     {past.length > 0 && (
-                      <div className="flex flex-col gap-5">
                         <div className="flex items-center gap-4">
                           <p className="text-xs font-semibold text-stone-500 tracking-widest uppercase">
                             Past ({past.length})
                           </p>
                           <div className="flex-1 h-px bg-white/5" />
-                        </div>
+            
                         <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
                           {past.map((b) => (
                             <AppointmentCard
                               key={b.id}
                               booking={b}
-                              mode="interviewee"
+                              mode="interviewer"
                               isPast={true}
                             />
                           ))}
