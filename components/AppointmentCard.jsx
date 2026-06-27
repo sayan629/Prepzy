@@ -168,7 +168,7 @@ export function AppointmentCard({ booking, mode, isPast = false }) {
               </Button>
             )}
 
-            {recordingUrl && has?.({ plan: "pro" }) && (
+            {recordingUrl && (mode === "interviewer") || has?.({ plan: "pro" }) && (
               <Button variant="outline" size="sm" className="gap-2" asChild>
                 <a
                   href={recordingUrl}
@@ -181,7 +181,7 @@ export function AppointmentCard({ booking, mode, isPast = false }) {
             )}
 
             {feedback &&
-              (has?.({ plan: "starter" }) || has?.({ plan: "pro" })) && (
+              ( mode=== "interviewer" || has?.({ plan: "starter" }) || has?.({ plan: "pro" })) && (
                 <>
                   <Button
                     variant="outline"
