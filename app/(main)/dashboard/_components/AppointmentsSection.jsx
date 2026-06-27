@@ -33,23 +33,21 @@ export default function AppointmentsSection({ appointments }){
                         Once interviewees book your slots, they&apos;ll appear here.
                     </p>
                 </div>
-            )}
-                    {/* ── Upcoming ── */}
+            ):(
+                <div className='flex flex-col gap-10'>
                     {scheduled.length > 0 && (
-                        <div className="flex items-center gap-4">
+                        <div className="flex flex-col gap-4">
                           <p className="text-xs font-semibold text-stone-500 tracking-widest uppercase">
                             Upcoming ({scheduled.length})
                           </p>
-                          <div className="flex-1 h-px bg-white/5" />
-                        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+                        <div className="grid grid-cols-1 lg:grid-cols-2 gap-5">
                           {scheduled.map((b) => (
                             <AppointmentCard key={b.id} booking={b} mode="interviewer" />
                           ))}
                         </div>
                         </div>
                     )}
-            
-                    {/* ── Past ── */}
+                   
                     {past.length > 0 && (
                         <div className="flex items-center gap-4">
                           <p className="text-xs font-semibold text-stone-500 tracking-widest uppercase">
