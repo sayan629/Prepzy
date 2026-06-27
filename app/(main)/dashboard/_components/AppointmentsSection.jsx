@@ -25,6 +25,15 @@ export default function AppointmentsSection({ appointments }){
                     All your scheduled and past sessions.
                 </p>
             </div>
+
+            {appointments.length === 0 ? (
+                <div className='bg-[#0f0f11] border border-white/10 rounded-2xl py-20 text-center'>
+                    <p className='text-stone-600 text-sm'>No Appointments yet.</p>
+                    <p className='text-stone-700 text-xs mt-1'>
+                        Once interviewees book your slots, they&apos;ll appear here.
+                    </p>
+                </div>
+            )}
                     {/* ── Upcoming ── */}
                     {scheduled.length > 0 && (
                         <div className="flex items-center gap-4">
