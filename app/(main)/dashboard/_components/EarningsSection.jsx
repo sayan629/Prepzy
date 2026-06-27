@@ -1,5 +1,5 @@
 "use client";
-import { Wallet } from "lucide-react";
+import { TrendingUp, Wallet } from "lucide-react";
 import { useState } from "react";
 
 export default function EarningsSection( { stats, history }){
@@ -19,6 +19,14 @@ export default function EarningsSection( { stats, history }){
             icon: <Wallet size={16} className="text-amber-400"/>,
             dollarValue: balance,
           },
+          {
+            label: "Total earned",
+            value: stats?.totalEarned ?? 0,
+            unit: "credits",
+            gold: false,
+            icon: <TrendingUp size={16} className="text-stone-400"/>,
+            dollarValue: totalEarnedDollars,
+          }
         ]}
       </div>
     </section>
