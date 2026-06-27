@@ -1,5 +1,5 @@
 "use client";
-import { TrendingUp, Wallet } from "lucide-react";
+import { CircleCheck, TrendingUp, Wallet } from "lucide-react";
 import { useState } from "react";
 
 export default function EarningsSection( { stats, history }){
@@ -26,7 +26,14 @@ export default function EarningsSection( { stats, history }){
             gold: false,
             icon: <TrendingUp size={16} className="text-stone-400"/>,
             dollarValue: totalEarnedDollars,
-          }
+          },
+          {
+            label: "Sessions done",
+            value: stats?.completedSessions ?? 0,
+            unit: "completed",
+            gold: false,
+            icon: <CircleCheck size={16} className="text-stone-400"/>
+          },
         ]}
       </div>
     </section>
