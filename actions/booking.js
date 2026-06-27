@@ -43,8 +43,8 @@ export const getInterviewerProfile = async (interviewerId) => {
     });
 
     return interviewer ?? null;
-  } catch (err) {
-    console.error("getInterviewerProfile error:", err);
+  } catch (error) {
+    console.error("getInterviewerProfile error:", error);
     throw new Error("Failed to fetch interviewer profile");
   }
 };
