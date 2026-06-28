@@ -1,4 +1,5 @@
 "use client";
+import { GrayTitle } from "@/components/reusables";
 import { CircleCheck, TrendingUp, Wallet } from "lucide-react";
 import { useState } from "react";
 
@@ -55,6 +56,18 @@ export default function EarningsSection( { stats, history }){
                 </p>
             </div>
         ))}
+      </div>
+
+      {/* Withdrawal Trigger card */}
+      <div className="bg-[#0f0f11] border border-white/10 rounded-2xl p-8 flex items-center justify-between gap-4">
+      <div>
+        <h2 className="font-serif text-xl tracking-tight">
+          <GrayTitle>Withdraw earnings</GrayTitle>
+        </h2>
+        <p className="text-xs text-stone-500 font-light mt-1">
+          20% platform fee applies. Processed within 2–3 business days.
+        </p>
+      </div>
       </div>
     </section>
 }
