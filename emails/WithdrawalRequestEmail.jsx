@@ -1,3 +1,4 @@
+import { Html } from ;
 
 
 
@@ -10,4 +11,19 @@ export function WithdrawalRequestEmail({
   paymentMethod,
   paymentDetail,
   reviewUrl,
-})
+}) {
+    return(
+        <Html>
+            <Body
+                style={{
+                    fontFamily: "Georgia , serif",
+                    padding: "32px 16px",
+                }}
+                >
+                    
+                </Body>
+
+
+        </Html>
+    )
+}
