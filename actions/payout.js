@@ -15,6 +15,13 @@ export const approvePayout = async ({ payoutId, adminPassword }) => {
 
     await db.payout.update({
         where: { id: payoutId },
-    })
+        data: {
+            status: "PROCESSED",
+            processedAt: new Date(),
+            processedBy: "admin",
+        },
+    });
 
-}
+    return { success: true };
+
+};
