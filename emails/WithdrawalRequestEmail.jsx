@@ -1,8 +1,11 @@
-import { Container, Text } from "lucide-react";
-import { Html } from ;
-import { Button } from "@/components/ui/button";
-
-
+import {
+  Html,
+  Body,
+  Container,
+  Text,
+  Button,
+  Hr,
+} from "@react-email/components";
 
 export function WithdrawalRequestEmail({
   interviewerName,
@@ -53,8 +56,8 @@ export function WithdrawalRequestEmail({
 
                                     {[
                                         ["Credits", credits],
-                                        ["Platform fee (20%)", `− $${platformFee.toFixed(2)}`],
-                                        ["Net payout", `$${netAmount.toFixed(2)}`],
+                                        ["Platform fee (20%)", `− $${Number(platformFee).toFixed(2)}`],
+                                        ["Net payout", `$${Number(netAmount).toFixed(2)}`],
                                         ["Method", paymentMethod],
                                         ["Send to", paymentDetail],
                                     ].map(([k, v]) => (
@@ -87,12 +90,10 @@ export function WithdrawalRequestEmail({
                                             textDecoration: "none",
                                         }}
                                         >
-                                            
+                                             Review &amp; Approve →
                                         </Button>
                         </Container>
                 </Body>
-
-
         </Html>
     )
 }
