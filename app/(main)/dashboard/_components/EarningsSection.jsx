@@ -2,7 +2,7 @@
 import { GrayTitle } from "@/components/reusables";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Dialog, DialogContent } from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { formatDate } from "@/lib/helpers";
 import { CircleCheck, TrendingUp, Wallet } from "lucide-react";
 import { useState } from "react";
@@ -125,7 +125,21 @@ export default function EarningsSection( { stats, history }){
             <span className="w-14 h-14 rounded-full bg-green-500/10 border border-green-500/20 flex items-center justify-center text-2x">
               ✓
             </span>
-          </div>
+            <p className="font-serif text-xl">
+              <GrayTitle>Request Submitted</GrayTitle>
+            </p>
+            <p className="text-xs text-stone-500 font-light">
+              We&apos;ll process your withdrawal within 2–3 business days.
+            </p>
+          </div> 
+        ):(
+          <>
+            <DialogHeader>
+              <DialogTitle className="font-serif text-xl tracking-tight">
+                <GrayTitle>Request Withdrawal </GrayTitle>
+              </DialogTitle>
+            </DialogHeader>
+          </>
         )}
         </DialogContent>
        </Dialog>
