@@ -147,6 +147,31 @@ export const getAvailability = async () => {
                     data: { creditBalance: { decrement: credits}},
                 }),
             ]);
-            
+
+            // Fire admin email- non-blocking, failure won't affect the user
+            try{
+                const reviewUrl = `${process.env.NEXT_PUBLIC_APP_URL}/payout/${payout.id}`;
+                const html = await render(
+                    WithdrawalRequestEmail({
+                        interviewerName: dbUser.name ?? "Unknown",
+                        interviewerEmail: dbUser.email,
+                        credits,
+                        platformFee,
+                        netAmount,
+                        paymentMethod,
+                        paymentDetail,
+                        reviewUrl
+                    })
+                );
+
+                await resumeAndPrerender.emails.send({
+                    from : "Prepzy <onboarding@resend.dev>",
+                    to: ADMIN_EMAIL,
+                    subject: `Withdrawal Request — ${dbUser.name} · ${credits} credits`,
+                    html,
+                });
+            } catch(emailErr){
+                console.error("Withdrawal email failed:", emailErr);
+            }
         }
     }
