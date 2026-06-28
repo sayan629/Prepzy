@@ -2,6 +2,7 @@
 import { GrayTitle } from "@/components/reusables";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { formatDate } from "@/lib/helpers";
 import { CircleCheck, TrendingUp, Wallet } from "lucide-react";
 import { useState } from "react";
@@ -107,9 +108,26 @@ export default function EarningsSection( { stats, history }){
                        ? "border-green-500/20 bg-green-500/10 text-green-400"
                        : "border-amber-500/20 bg-amber-500/10 text-amber-400"
                     }
+                    >
+                      {p.status.charAt(0) + p.status.slice(1).toLowerCase()}
+                    </Badge>
+                    </div>
             ))}
           </div>
         </div>
       )}
+       
+       {/* Dialog */}
+       <Dialog open = {open} onOpenChange={handleOpenChange}>
+        <DialogContent className="bg-[#0f0f11] border border-white/10 text-stone-100 max-w-md">
+        {done ? (
+          <div className="py-8 text-center flex flex-col items-center gap-4">
+            <span className="w-14 h-14 rounded-full bg-green-500/10 border border-green-500/20 flex items-center justify-center text-2x">
+              ✓
+            </span>
+          </div>
+        )}
+        </DialogContent>
+       </Dialog>
     </section>
 }
