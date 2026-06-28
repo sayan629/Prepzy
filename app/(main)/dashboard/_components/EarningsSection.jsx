@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { formatDate } from "@/lib/helpers";
 import { CircleCheck, TrendingUp, Wallet } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 
 const PAYMENT_METHODS = [
@@ -20,21 +20,35 @@ const PAYMENT_METHODS = [
 
 const PLATFORM_FEE = 0.2;
 
-const handleOpenChange = (val) => {
-  if (!val && !loading) {
-    setOpen(false);
-    if(!done){
-      setDetail("");
-      setMethod("PAYPAL")
-    }
-  }
-}
+
 export default function EarningsSection( { stats, history }){
     const [open, setOpen] = useState(false); //for requsting payment
     const balance = (stats?.creditBalance ?? 0)*5;
     const totalEarnedDollars = (stats?.totalEarned ?? 0) * 5;
 
+      useEffect(() => {
+        if (data?.success) {
+          setDone(true);
+          setTimeout(() => {
+            setOpen(false);
+            setTimeout(() => {
+              setDone(false);
+              setDetail("");
+              setMethod("PAYPAL");
+            }, 300);
+          }, 2000);
+        }
+      }, [data]);
 
+    const handleOpenChange = (val) => {
+      if (!val && !loading) {
+        setOpen(false);
+        if(!done){
+          setDetail("");
+          setMethod("PAYPAL")
+    }
+  }
+}
     return <section className="flex flex-col gap-6">
       <div className="grid grid-cols-3 gap-4">
         {[
