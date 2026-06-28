@@ -32,6 +32,21 @@ export function WithdrawalRequestEmail({
                                 >
                                     MockMate 
                                 </Text>
+                                <Text
+                                    style={{
+                                        fontSize: "11px",
+                                        color: "#6b7280",
+                                        letterSpacing: "0.1em",
+                                        textTransform: "0 0 32px",
+                                    }}
+                                    >
+                                        Withdrawal Request
+                                    </Text>
+
+                                    <Text
+                                        style={{ fontSize: "14px", color: "#374151", margin: "0 0 4px"}}>
+                                            
+                                        </Text>
                         </Container>
                 </Body>
 
