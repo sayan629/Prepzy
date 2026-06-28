@@ -1,3 +1,4 @@
+import { Container, Text } from "lucide-react";
 import { Html } from ;
 
 
@@ -20,7 +21,18 @@ export function WithdrawalRequestEmail({
                     padding: "32px 16px",
                 }}
                 >
-                    
+                    <Container
+                        style={{
+                            maxWidth: "480px",
+                            margin: "0 auto",
+                        }}
+                        >
+                            <Text
+                                style={{ fontSize: "22px", color: "#111827", margin: "0 0 4px" }}
+                                >
+                                    MockMate 
+                                </Text>
+                        </Container>
                 </Body>
 
 
