@@ -3,6 +3,7 @@ import { GrayTitle } from "@/components/reusables";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import { Separator } from "@/components/ui/separator";
 import useFetch from "@/hooks/use-fetch";
 import { formatDate } from "@/lib/helpers";
 import { CircleCheck, TrendingUp, Wallet } from "lucide-react";
@@ -90,7 +91,7 @@ export default function EarningsSection( { stats, history }){
           <div 
             key = {stat.label} className="bg-[#0f0f11] border border-white/10 rounded-2xl p-6 flex flex-col gap-2">
               <span className="text-lg">{stat.icon}</span>
-              <p className={`font-serif text-4xl leading-none tracking-tight &{
+              <p className={`font-serif text-4xl leading-none tracking-tight ${
                 stat.gold
                   ? "bg-linear-to-br from-amber-300 to-amber-500 bg-clip-text text-transparent"
                   : "bg-linear-to-br from-stone-100 to-stone-400 bg-clip-text text-transparent"
@@ -190,6 +191,26 @@ export default function EarningsSection( { stats, history }){
                 <span className="text-amber-400">{balance} credits</span> will be withdrawn.
               </DialogDescription>
             </DialogHeader>
+
+            <Separator className="bg-white/5" />
+            <div className="flex flex-col gap-5 py-2">
+              {/* Fees breakdown */}
+              <div className="rounded-xl bg-[#141417] border border-white/8 p-4 flex flex-col gap-2">
+                <div className="flex justify-between text-xs text-stone-500">
+                  <span>Balance (1 Cr = $5) </span>
+                  <span className="text-green-400">${balance}</span>
+                </div>
+                <div className="flex justify-between text-xs text-stone-500">
+                  <span>Platform fee (20%) </span>
+                  <span className="text-red-400">− ${feeAmount}</span>
+                </div>
+                <Separator className="bg-white/8 my-1" />
+                <div className="flex justify-between text-sm font-medium">
+                  <span className="text-stone-300">You receive</span>
+                  <span className="text-amber-400">${netAmount}</span>
+                </div>
+              </div>
+            </div>
           </>
         )}
         </DialogContent>
