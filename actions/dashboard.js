@@ -125,4 +125,28 @@ export const getAvailability = async () => {
             throw new Error("Insufficient credit balance");
         if(!paymentMethod || !paymentDetail)
             throw new Error("Payment Details required");
+
+        const PLATFORM_FEE = 0.2;
+        const netAmount = credits * (1- PLATFORM_FEE) * 5;
+        const platformFee = credits * PLATFORM_FEE * 5;
+        try{
+            const [payout] = await db.$transaction([
+                db.payout.create({
+                    data:{
+                        interviewerId: dbUser.id,
+                        credits,
+                        platformFee,
+                        netAmount,
+                        paymentMethod,
+                        paymentDetail,
+                        status: "PROCESSIING",
+                    },
+                }),
+                db.user.update({
+                    where:{ id: dbUser.id },
+                    data: { creditBalance: { decrement: credits}},
+                }),
+            ]);
+            
+        }
     }
