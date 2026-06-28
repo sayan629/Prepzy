@@ -3,7 +3,9 @@ import { GrayTitle } from "@/components/reusables";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import { Label } from "@/components/ui/label";
 import { Separator } from "@/components/ui/separator";
+import { Tabs } from "@/components/ui/tabs";
 import useFetch from "@/hooks/use-fetch";
 import { formatDate } from "@/lib/helpers";
 import { CircleCheck, TrendingUp, Wallet } from "lucide-react";
@@ -209,7 +211,28 @@ export default function EarningsSection( { stats, history }){
                   <span className="text-stone-300">You receive</span>
                   <span className="text-amber-400">${netAmount}</span>
                 </div>
+                <Separator className="bg-white/8 my-1" />
+
+                <div className="flex justify-between text-sm font-medium">
+                  <span className="text-stone-300">You receive</span>
+                  <span className="text-amber-400">${netAmount}</span>
+                </div>
               </div>
+
+              {/* Payment method - Tab */}
+
+              <div className="flex flex-col gap-2">
+                <Label className="text-stone-400 text-xs">
+                  Payment Method
+                </Label>
+                <Tabs
+                  value={method}
+                  onValueChange={(val) => {
+                    setMethod(val);
+                    setDetail("");
+                  }}
+              </div>
+
             </div>
           </>
         )}
