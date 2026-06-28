@@ -1,9 +1,19 @@
 "use server";
-import { checkRateLimit } from "@/lib/arject";
+import { checkRateLimit, createRateLimiter } from "@/lib/arject";
 import { db } from "@/lib/prisma";
 import { currentUser } from "@clerk/nextjs/server"
+import { Resend } from "resend";
 import { revalidatePath } from "next/cache";
 
+
+const resend = new Resend(process.env.RESEND_API_KEY);
+const ADMIN_EMAIL = "sayanpal771@gmail.com";
+
+const withdrawalLimiter = createRateLimiter({
+    refillRate: 1,
+    interval: "1h",
+    capacity: 3,
+})
 
 export const setAvailability = async ({ startTime, endTime }) => {
     const user = await currentUser();
@@ -180,4 +190,13 @@ export const getAvailability = async () => {
             throw new Error("Withdrawal request failed");
         }
     };
-    
+
+    export const getWithdrawalHistory = async() => {
+        const user = await currentUser();
+        if (!user) throw new Error("User not found");
+
+        return db.payout.findMany({
+            where: { interviewerId: dbUser.id },
+            orderBy: {createdAt: "desc" },
+        });
+    };
