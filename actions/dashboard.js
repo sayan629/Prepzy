@@ -1,4 +1,5 @@
 "use server";
+import { checkRateLimit } from "@/lib/arject";
 import { db } from "@/lib/prisma";
 import { currentUser } from "@clerk/nextjs/server"
 import { revalidatePath } from "next/cache";
@@ -103,3 +104,25 @@ export const getAvailability = async () => {
             completedSessions: dbUser.bookingsAsInterviewer.length,
         };
     };
+
+    export const requestWithdrawal = async({
+        credits,
+        paymentMethod,
+        paymentDetail,
+    }) => {
+        const user = await currentUser();
+        if (!user) throw new Error("Unauthorized");
+
+        const req = await request();
+        const rateLimitError = await checkRateLimit(withdrawalLimiter, req, user.id);
+        if (rateLimitError) throw new Error(rateLimitError);
+
+        const dbUser = await db.user.findUnique({ where: {clerkUserId: user.id }});
+        if(!dbUser || dbUser.role !== "INTERVIEWER") throw new Error("Forbidden");
+
+        if(!credits || credits <= 0) throw new Error("Invalid credit amount");
+        if(credits > dbUser.creditBalance)
+            throw new Error("Insufficient credit balance");
+        if(!paymentMethod || !paymentDetail)
+            throw new Error("Payment Details required");
+    }
