@@ -1,6 +1,8 @@
 "use client";
 import { GrayTitle } from "@/components/reusables";
+import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { formatDate } from "@/lib/helpers";
 import { CircleCheck, TrendingUp, Wallet } from "lucide-react";
 import { useState } from "react";
 
@@ -77,5 +79,37 @@ export default function EarningsSection( { stats, history }){
           Request Withdrawal
         </Button>
       </div>
+
+      {/* Withdrawal History */}
+      {history?.length >0 && (
+        <div className="bg-[#0f0f11] border border-white/10 rounded-2xl p-8 flex flex-col gap-5">
+          <p className="text-xs font-semibold text-stone-500 tracking-widest uppercase">
+            Withdrawal history
+          </p>
+          <div className="flex flex-col gap-3">
+            {history.map((p)=> (
+              <div 
+                key ={p.id}
+                className="flex items-center justify-between bg-[#141417] border border-white/8 rounded-xl px-5 py-4"
+              >
+                <div className="flex flex-col gap-0.5">
+                  <p className="text-sm text-stone-300">
+                    {p.credits} credits → ${p.netAmount.toFixed(2)}
+                  </p>
+                  <p className="text-xs text-stone-600">
+                    {p.paymentMethod} · {formatDate(p.createdAt)}
+                  </p>
+                  </div>
+                  <Badge
+                    variant="outline"
+                    className={
+                      p.status === "PROCESSED"
+                       ? "border-green-500/20 bg-green-500/10 text-green-400"
+                       : "border-amber-500/20 bg-amber-500/10 text-amber-400"
+                    }
+            ))}
+          </div>
+        </div>
+      )}
     </section>
 }
