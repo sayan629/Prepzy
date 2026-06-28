@@ -1,5 +1,6 @@
 "use client";
 import { GrayTitle } from "@/components/reusables";
+import { Button } from "@/components/ui/button";
 import { CircleCheck, TrendingUp, Wallet } from "lucide-react";
 import { useState } from "react";
 
@@ -68,6 +69,13 @@ export default function EarningsSection( { stats, history }){
           20% platform fee applies. Processed within 2–3 business days.
         </p>
       </div>
+      <Button
+        variant="gold"
+        disabled = {balance<=0}
+        onClick={() => setOpen(true)}
+        className="shrink-0">
+          Request Withdrawal
+        </Button>
       </div>
     </section>
 }
