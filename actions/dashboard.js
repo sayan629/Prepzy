@@ -4,6 +4,9 @@ import { db } from "@/lib/prisma";
 import { currentUser } from "@clerk/nextjs/server"
 import { Resend } from "resend";
 import { revalidatePath } from "next/cache";
+import { request } from "@arcjet/next";
+import { WithdrawalRequestEmail } from "@/emails/WithdrawalRequestEmail";
+import { render } from "@react-email/components";
 
 
 const resend = new Resend(process.env.RESEND_API_KEY);
@@ -173,7 +176,6 @@ export const getAvailability = async () => {
                         reviewUrl
                     })
                 );
-
                 await resumeAndPrerender.emails.send({
                     from : "Prepzy <onboarding@resend.dev>",
                     to: ADMIN_EMAIL,
