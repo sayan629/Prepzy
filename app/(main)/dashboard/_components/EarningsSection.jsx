@@ -2,7 +2,7 @@
 import { GrayTitle } from "@/components/reusables";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Separator } from "@/components/ui/separator";
@@ -258,7 +258,34 @@ export default function EarningsSection( { stats, history }){
                   className= "bg-[#141417] border-white/10 text-stone-100" />
                </div>
 
+               {error && (
+                <p className="text-xs text-red-400">
+                  {error?.message || error}
+                </p>
+               )}
             </div>
+
+            <DialogFooter className="gap-2">
+              <Button
+                variant="outline"
+                onClick={() => handleOpenChange(false)}
+                disabled={loading} >
+                  Cancel
+                </Button>
+                <Button
+                  variant="gold"
+                  disabled = {!isValid || loading}
+                  onClick={() => 
+                    withdrawFn({
+                      credits: stats?.creditBalance,
+                      paymentMethod: method,
+                      paymentDetail: detail,
+                    })
+                  }
+                  >
+                    {loading ? "Submitting…" : "Confirm Withdrawal"}
+                    </Button>
+            </DialogFooter>
           </>
         )}
         </DialogContent>
