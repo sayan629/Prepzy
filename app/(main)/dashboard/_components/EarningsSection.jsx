@@ -2,7 +2,7 @@
 import { GrayTitle } from "@/components/reusables";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { formatDate } from "@/lib/helpers";
 import { CircleCheck, TrendingUp, Wallet } from "lucide-react";
 import { useState } from "react";
@@ -138,6 +138,10 @@ export default function EarningsSection( { stats, history }){
               <DialogTitle className="font-serif text-xl tracking-tight">
                 <GrayTitle>Request Withdrawal </GrayTitle>
               </DialogTitle>
+              <DialogDescription className="text-stone-500 text-xs font-light">
+                Your full balance of{" "}
+                <span className="text-amber-400">{balance} credits</span> will be withdrawn.
+              </DialogDescription>
             </DialogHeader>
           </>
         )}
