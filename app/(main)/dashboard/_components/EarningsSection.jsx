@@ -3,6 +3,7 @@ import { GrayTitle } from "@/components/reusables";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Separator } from "@/components/ui/separator";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -246,6 +247,16 @@ export default function EarningsSection( { stats, history }){
               </div>
                
                {/* Payment Details*/}
+               <div className="flex flex-col gap-2">
+                <Label className="text-stone-400 text-xs">
+                  {selectedMethod?.label} details 
+                </Label>
+                <Input
+                  value={detail}
+                  onChange={(e) => setDetail(e.target.value)}
+                  placeholder= {selectedMethod?.placeholder}
+                  className= "bg-[#141417] border-white/10 text-stone-100" />
+               </div>
 
             </div>
           </>
