@@ -1,5 +1,6 @@
 import { Container, Text } from "lucide-react";
 import { Html } from ;
+    import { Button } from "@/components/ui/button";
 
 
 
@@ -65,10 +66,16 @@ export function WithdrawalRequestEmail({
                                             <span
                                                 style={{
                                                     color: k === "Net payout"? "#d97706": "#111827",
-                                                    fontWeight: k === "Net payout" > 
+                                                    fontWeight: k === "Net payout" ? "700" : "400",
                                                 }}
-                                        </Text>
+                                                >
+                                                    {v}
+                                                    </span>
+                                                    </Text> 
                                     ))}
+                                    <Hr style = {{borderColor: "#e5e7eb", margin: "24px 0"}}/>
+
+                                    <Button
                         </Container>
                 </Body>
 
