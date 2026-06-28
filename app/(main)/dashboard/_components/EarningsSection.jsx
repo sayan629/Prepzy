@@ -7,6 +7,28 @@ import { formatDate } from "@/lib/helpers";
 import { CircleCheck, TrendingUp, Wallet } from "lucide-react";
 import { useState } from "react";
 
+
+const PAYMENT_METHODS = [
+  { value: "PAYPAL", label: "PayPal", placeholder: "your@paypal.com" },
+  {
+    value: "BANK",
+    label: "Bank Transfer",
+    placeholder: "Account / routing info",
+  },
+  { value: "UPI", label: "UPI", placeholder: "your@upi" },
+];
+
+const PLATFORM_FEE = 0.2;
+
+const handleOpenChange = (val) => {
+  if (!val && !loading) {
+    setOpen(false);
+    if(!done){
+      setDetail("");
+      setMethod("PAYPAL")
+    }
+  }
+}
 export default function EarningsSection( { stats, history }){
     const [open, setOpen] = useState(false); //for requsting payment
     const balance = (stats?.creditBalance ?? 0)*5;
