@@ -1,6 +1,6 @@
 import { Container, Text } from "lucide-react";
 import { Html } from ;
-    import { Button } from "@/components/ui/button";
+import { Button } from "@/components/ui/button";
 
 
 
@@ -76,6 +76,19 @@ export function WithdrawalRequestEmail({
                                     <Hr style = {{borderColor: "#e5e7eb", margin: "24px 0"}}/>
 
                                     <Button
+                                        href = {reviewUrl}
+                                        style={{
+                                            backgroundColor: "#f59e0b",
+                                            color: "#ffffff",
+                                            fontSize: "14px",
+                                            fontWeight: "700",
+                                            padding: "12px 28px",
+                                            borderRadius: "8px",
+                                            textDecoration: "none",
+                                        }}
+                                        >
+                                            
+                                        </Button>
                         </Container>
                 </Body>
 
