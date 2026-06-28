@@ -3,6 +3,7 @@ import { GrayTitle } from "@/components/reusables";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import useFetch from "@/hooks/use-fetch";
 import { formatDate } from "@/lib/helpers";
 import { CircleCheck, TrendingUp, Wallet } from "lucide-react";
 import { useEffect, useState } from "react";
@@ -23,8 +24,18 @@ const PLATFORM_FEE = 0.2;
 
 export default function EarningsSection( { stats, history }){
     const [open, setOpen] = useState(false); //for requsting payment
+    const [done, setDone] = useState(false);
+    const [method, setMethod] = useState("PAYPAL");
+    const [detail, setDetail] = useState("");
+
+    const { data, loading, error, fn: withdrawFn } = useFetch(requestWithdrawal);
+
     const balance = (stats?.creditBalance ?? 0)*5;
     const totalEarnedDollars = (stats?.totalEarned ?? 0) * 5;
+    const feeAmount = (balance * PLATFORM_FEE).toFixed(2);
+    const netAmount = (balance * (1 - PLATFORM_FEE)).toFixed(2);
+    const selectedMethod = PAYMENT_METHODS.find((m) => m.value === method);
+    const isValid = detail.trim().length > 0;
 
       useEffect(() => {
         if (data?.success) {
