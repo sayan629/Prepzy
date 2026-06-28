@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Label } from "@/components/ui/label";
 import { Separator } from "@/components/ui/separator";
-import { Tabs } from "@/components/ui/tabs";
+import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import useFetch from "@/hooks/use-fetch";
 import { formatDate } from "@/lib/helpers";
 import { CircleCheck, TrendingUp, Wallet } from "lucide-react";
@@ -231,7 +231,21 @@ export default function EarningsSection( { stats, history }){
                     setMethod(val);
                     setDetail("");
                   }}
+                  >
+                    <TabsList className= "bg-[#141417] border border-white/10 w-full">
+                    {PAYMENT_METHODS.map((m) => (
+                      <TabsTrigger
+                        key={m.value}
+                        value = {m.value}
+                        className="flex-1 text-xs">
+                          {m.label}
+                        </TabsTrigger>
+                    ))}
+                    </TabsList>
+                  </Tabs>
               </div>
+               
+               {/* Payment Details*/}
 
             </div>
           </>
