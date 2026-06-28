@@ -57,7 +57,17 @@ export function WithdrawalRequestEmail({
                                         ["Method", paymentMethod],
                                         ["Send to", paymentDetail],
                                     ].map(([k, v]) => (
-                                        
+                                        <Text
+                                            key = {k}
+                                            style={{fontSize: "13px", color: "#6b7280", margin: "0 0 8px"}}
+                                        >
+                                            {k}:{" "}
+                                            <span
+                                                style={{
+                                                    color: k === "Net payout"? "#d97706": "#111827",
+                                                    fontWeight: k === "Net payout" > 
+                                                }}
+                                        </Text>
                                     ))}
                         </Container>
                 </Body>
