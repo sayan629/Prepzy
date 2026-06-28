@@ -173,5 +173,11 @@ export const getAvailability = async () => {
             } catch(emailErr){
                 console.error("Withdrawal email failed:", emailErr);
             }
+            revalidatePath("/dashboard");
+            return { success:true, netAmount};
+        } catch(error){
+            console.error(error);
+            throw new Error("Withdrawal request failed");
         }
-    }
+    };
+    
