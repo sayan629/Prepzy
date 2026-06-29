@@ -4,7 +4,7 @@ import { notFound } from "next/navigation";
 import PayoutReviewClient from "./_components/PayoutReviewClient";
 
 
-export default async function PayoutReviewPage({ params }{
+export default async function PayoutReviewPage({ params }){
     const { id } = await params;
 
     const payout = await db.payout.findUnique({
@@ -13,7 +13,7 @@ export default async function PayoutReviewPage({ params }{
             interviewer: { select : {name:true, email:true }},
         },
     });
-    
+
     if(!payout) notFound();
 
     return(
