@@ -52,9 +52,19 @@ export default function PayoutReviewClient({ payout }){
 
                 <Separator className="bg-white/8 my-1"/>
                 <div className="flex justify-between text-sm font-medium">
-                    
+                    <span className="text-stone-300">Pay out</span>
+                    <span className="font-serif text-lg bg-linear-to-br from-amber-300 to-amber-500 bg-clip-text text-transparent leading-none">
+                        ${payout.netAmount.toFixed(2)}
+                    </span>
+                </div>
+                <div className="flex justify-between text-xs pt-1">
+                    <span className="text-stone-500">Send to</span>
+                    <span className="text-stone-300">
+                        {payout.paymentMethod} · {payout.paymentDetail}
+                    </span>
                 </div>
             </div>
+            
         </div>
     )
 }
