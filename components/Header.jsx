@@ -29,7 +29,7 @@ const Header  = async() => {
     { user && <RoleRedirect role={user.role} />}
 
     {/* Sign in */}
-    <div className="flex items-center gp-3">
+    <div className="flex items-center gap-3">
         <Show when="signed-out">
 
               <SignInButton mode="modal">
