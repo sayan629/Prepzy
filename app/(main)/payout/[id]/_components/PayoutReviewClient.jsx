@@ -1,3 +1,6 @@
+
+"use client";
+
 import { approvePayout } from "@/actions/payout";
 import { GrayTitle } from "@/components/reusables";
 import { Button } from "@/components/ui/button";
@@ -96,6 +99,9 @@ export default function PayoutReviewClient({ payout }){
                     approveFn({ payoutId: payout.id, adminPassword: password})
                 }
                 className="w-full"
+            >
+                {loading? "Approving…" : `Approve $${payout.netAmount.toFixed(2)} →`}
+            </Button>
         </div>
-    )
+    );
 }
