@@ -27,4 +27,24 @@ export default function PayoutReviewClient({ payout }){
             </div>
         );
     }
+
+    return(
+        <div className="bg-[#0f0f11] border border-white/10 rounded-2xl p-8 flex flex-col gap-5">
+            {/* Sumaary of payout */}
+            <div className="rounded-xl bg-[#141417] border border-white/8 p-4 flex flex-col gap-2">
+                <div className="flex justify-between text-xs">
+                    <span className="text-stone-500">Interviewer</span>
+                    <span className="text-stone-300">{payout.interviewerName}</span>
+                </div>
+                <div className="flex justify-between text-xs">
+                    <span className="text-stone-500">Email</span>
+                    <span className="text-stone-300">{payout.interviewerEmail}</span>
+                </div>
+                <div className="flex justify-between text-xs">
+                    <span className="text-stone-500">Credits</span>
+                    <span className="text-stone-300">{payout.credits}</span>
+                </div>
+            </div>
+        </div>
+    )
 }
