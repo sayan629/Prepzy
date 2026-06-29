@@ -9,4 +9,3 @@ export default async function PayoutReviewPage({ params }{
             interviewer: { select : {name:true, email:true }},
         },
     });
-})
