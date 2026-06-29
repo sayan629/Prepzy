@@ -13,6 +13,7 @@ export default async function PayoutReviewPage({ params }{
             interviewer: { select : {name:true, email:true }},
         },
     });
+    
     if(!payout) notFound();
 
     return(
@@ -30,7 +31,13 @@ export default async function PayoutReviewPage({ params }{
          payout={{
             id: payout.id,
             credits:payout.credits,
-            
+            netAmount: payout.netAmount,
+            platformFee: payout.platformFee,
+            paymentMethod: payout.paymentMethod,
+            paymentDetail: payout.paymentDetail,
+            status: payout.status,
+            interviewerName: payout.interviewer.name,
+            interviewerEmail: payout.interviewer.email;
          }}
          />
          </div>
