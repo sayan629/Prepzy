@@ -152,7 +152,7 @@ export const getAvailability = async () => {
                         netAmount,
                         paymentMethod,
                         paymentDetail,
-                        status: "PROCESSIING",
+                        status: "PROCESSING",
                     },
                 }),
                 db.user.update({
