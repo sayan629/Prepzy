@@ -83,6 +83,11 @@ export default function PayoutReviewClient({ payout }){
                     className="bg-[#141417] border-white/10 text-stone-100"
                 />
             </div>
+
+            {error && (
+                <p className="text-xs text-red-400">{error?.message || error}</p>
+            )}
+            
         </div>
     )
 }
