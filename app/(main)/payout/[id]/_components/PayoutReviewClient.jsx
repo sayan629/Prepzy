@@ -1,5 +1,7 @@
 import { approvePayout } from "@/actions/payout";
 import { GrayTitle } from "@/components/reusables";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 import { Separator } from "@/components/ui/separator";
 import useFetch from "@/hooks/use-fetch";
 import { useEffect, useState } from "react";
@@ -64,7 +66,23 @@ export default function PayoutReviewClient({ payout }){
                     </span>
                 </div>
             </div>
-            
+
+            {/* Password */}
+            <div className="flex flex-col gap-2">
+                <Label className="text-stone-400 text-xs">Admin password</Label>
+                <Input
+                    type="password"
+                    value= {password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    onKeyDown={(e) => 
+                        e.key === "Enter" &&
+                        password.trim() &&
+                        approveFn({ payoutId: payout.id, adminPassword: password})
+                    }
+                    placeholder="Enter password…"
+                    className="bg-[#141417] border-white/10 text-stone-100"
+                />
+            </div>
         </div>
     )
 }
