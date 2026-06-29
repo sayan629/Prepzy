@@ -1,5 +1,6 @@
 import { approvePayout } from "@/actions/payout";
 import { GrayTitle } from "@/components/reusables";
+import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Separator } from "@/components/ui/separator";
@@ -87,7 +88,14 @@ export default function PayoutReviewClient({ payout }){
             {error && (
                 <p className="text-xs text-red-400">{error?.message || error}</p>
             )}
-            
+
+            <Button
+                variant="gold"
+                disabled={!password.trim() || loading}
+                onClick={()=>
+                    approveFn({ payoutId: payout.id, adminPassword: password})
+                }
+                className="w-full"
         </div>
     )
 }
