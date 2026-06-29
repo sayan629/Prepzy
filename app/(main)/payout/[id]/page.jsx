@@ -37,8 +37,8 @@ export default async function PayoutReviewPage({ params }){
             paymentMethod: payout.paymentMethod,
             paymentDetail: payout.paymentDetail,
             status: payout.status,
-            interviewerName: payout.interviewer.name,
-            interviewerEmail: payout.interviewer.email
+            interviewerName: payout.interviewer?.name ?? "",
+            interviewerEmail: payout.interviewer?.email ?? "",
          }}
          />
          </div>
