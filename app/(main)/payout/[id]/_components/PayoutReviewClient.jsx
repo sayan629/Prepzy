@@ -1,5 +1,6 @@
 import { approvePayout } from "@/actions/payout";
 import { GrayTitle } from "@/components/reusables";
+import { Separator } from "@/components/ui/separator";
 import useFetch from "@/hooks/use-fetch";
 import { useEffect, useState } from "react";
 
@@ -43,6 +44,15 @@ export default function PayoutReviewClient({ payout }){
                 <div className="flex justify-between text-xs">
                     <span className="text-stone-500">Credits</span>
                     <span className="text-stone-300">{payout.credits}</span>
+                </div>
+                <div className="flex justify-between text-xs">
+                    <span className="text-stone-500">Platform fee (20%)</span>
+                    <span className="text-red-400">− ${payout.platformFee.toFixed(2)}</span>
+                </div>
+
+                <Separator className="bg-white/8 my-1"/>
+                <div className="flex justify-between text-sm font-medium">
+                    
                 </div>
             </div>
         </div>
