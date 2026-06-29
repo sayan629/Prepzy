@@ -1,7 +1,8 @@
+
 import { GoldTitle, GrayTitle, SectionLabel } from "@/components/reusables";
-import { db } from "@/lib/prisma";
 import { notFound } from "next/navigation";
 import PayoutReviewClient from "./_components/PayoutReviewClient";
+import { db } from "@/lib/prisma";
 
 
 export default async function PayoutReviewPage({ params }){
@@ -37,7 +38,7 @@ export default async function PayoutReviewPage({ params }){
             paymentDetail: payout.paymentDetail,
             status: payout.status,
             interviewerName: payout.interviewer.name,
-            interviewerEmail: payout.interviewer.email;
+            interviewerEmail: payout.interviewer.email
          }}
          />
          </div>
