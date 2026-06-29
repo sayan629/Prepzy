@@ -15,7 +15,7 @@ const ADMIN_EMAIL = "sayanpal771@gmail.com";
 const withdrawalLimiter = createRateLimiter({
     refillRate: 1,
     interval: "1h",
-    capacity: 3,
+    capacity: 4,
 })
 
 export const setAvailability = async ({ startTime, endTime }) => {
@@ -176,12 +176,19 @@ export const getAvailability = async () => {
                         reviewUrl
                     })
                 );
-                await resumeAndPrerender.emails.send({
-                    from : "Prepzy <onboarding@resend.dev>",
+                // await resumeAndPrerender.emails.send({
+                //     from : "Prepzy <onboarding@resend.dev>",
+                //     to: ADMIN_EMAIL,
+                //     subject: `Withdrawal Request — ${dbUser.name} · ${credits} credits`,
+                //     html,
+                // });
+                    const result = await resend.emails.send({
+                    from: "Prepzy <onboarding@resend.dev>",
                     to: ADMIN_EMAIL,
                     subject: `Withdrawal Request — ${dbUser.name} · ${credits} credits`,
                     html,
                 });
+                    console.log("Resend Result:", result);
             } catch(emailErr){
                 console.error("Withdrawal email failed:", emailErr);
             }
