@@ -1,4 +1,3 @@
-
 import { StarsBackgroundDemo } from "@/components/demo-components-backgrounds-stars";
 import { GoldTitle, GrayTitle, SectionHeading, SectionLabel } from "@/components/reusables";
 import { Badge } from "@/components/ui/badge";
@@ -113,18 +112,20 @@ export default function Home() {
       <p className="text-center text-xs font-medium text-stone-600 tracking-widest uppercase mb-8">
         Interviewees landed roles at
       </p>
-      <div className="flex fles-wrap items-center justify-center gap-20 px-6">
-        {LOGOS.map((l)=>(
-          <Image
-          key={l.alt}
-          src={l.src}
-          alt={l.alt}
-          width={50}
-          height={50}
-          className="h-6 w-auto opacity-60 grayscale"
-          />
-        ))}
-      </div>
+      <div className="overflow-hidden w-full">
+  <div className="flex w-max animate-marquee gap-20">
+    {[...LOGOS, ...LOGOS].map((l, i) => (
+      <Image
+        key={`${l.alt}-${i}`}
+        src={l.src}
+        alt={l.alt}
+        width={50}
+        height={50}
+        className="h-6 w-auto opacity-60 grayscale flex-shrink-0"
+      />
+    ))}
+  </div>
+</div>
     </section>
     <section className="relative z-10 py-28 max-w-5xl mx-auto px-6">
       <div className="text-center mb-16">
